@@ -83,8 +83,8 @@ const Home = () => {
                 <h3>Login or sign up to connect with all your best buds!</h3>
             </div>
             <div id='buttons'>
-                <button onClick={login}>Login</button>
-                <button onClick={signup}>Signup</button>
+                <button onClick={login}>Login 🕊️</button>
+                <button onClick={signup}>Signup 🐾</button>
             </div>
         </StyledHome>
     )
