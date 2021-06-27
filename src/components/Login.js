@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
 
 const StyledLogin = styled.div`
 height: 100vh;
@@ -91,6 +92,7 @@ const initialFormValues = {
 const Login = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
     const [error, setError] = useState()
+    const { push } = useHistory()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -105,6 +107,8 @@ const Login = () => {
         axios.post('https://pet-post.herokuapp.com/api/auth/login', formValues)
         .then(res => {
             console.log(res)
+            localStorage.setItem('token', res.data.token)
+            push('/timeline')
         })
         .catch(err => {
             console.log(err.response.data.message)
