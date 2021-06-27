@@ -73,7 +73,7 @@ const Home = () => {
     }
 
     const signup = () => {
-        push('/signup')
+        push('/register')
     }
 
     return (
