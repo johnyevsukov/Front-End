@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const StyledHome = styled.div`
 margin: 0;
@@ -24,8 +25,8 @@ animation: gradient 15s ease infinite;
 }
 
 #info {
-    border: 2px solid gray;
     width: 65%;
+    border-right: 4px dotted white;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -38,7 +39,6 @@ animation: gradient 15s ease infinite;
 #buttons {
     display: flex;
     flex-direction: column;
-    border: 2px solid gray;
     width: 35%;
     justify-content: center;
     align-items: center;
@@ -53,7 +53,7 @@ animation: gradient 15s ease infinite;
         background-color: #fafdff;
 
         &:hover {
-            background-color: lightblue;
+            background-color: #006aff;
             color: white;
             transform: scale(1.1);
             transition: all .2s ease-in-out;
@@ -66,6 +66,16 @@ animation: gradient 15s ease infinite;
 
 
 const Home = () => {
+    const { push } = useHistory()
+
+    const login = () => {
+        push('/login')
+    }
+
+    const signup = () => {
+        push('/signup')
+    }
+
     return (
         <StyledHome>
             <div id='info'>
@@ -73,8 +83,8 @@ const Home = () => {
                 <h3>Login or sign up to connect with all your best buds!</h3>
             </div>
             <div id='buttons'>
-                <button>Login</button>
-                <button>Signup</button>
+                <button onClick={login}>Login</button>
+                <button onClick={signup}>Signup</button>
             </div>
         </StyledHome>
     )
