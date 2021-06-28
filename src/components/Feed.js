@@ -12,6 +12,7 @@ width: 70%;
 display: flex;
 flex-direction: column;
 align-items: center;
+overflow: scroll;
 `
 
 const Feed = () => {
