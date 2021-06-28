@@ -80,6 +80,21 @@ form {
         color: red;
         font-size: x-large;
     }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 1vh;
+        height: 1vh;
+        animation: spin 2s linear infinite;
+        margin-top: 2%;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
 }
 `
 
@@ -91,6 +106,7 @@ const initialFormValues = {
 
 const Login = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
     const { push } = useHistory()
 
@@ -104,14 +120,17 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
         axios.post('https://pet-post.herokuapp.com/api/auth/login', formValues)
         .then(res => {
             console.log(res)
+            setLoading(false)
             localStorage.setItem('token', res.data.token)
             push('/timeline')
         })
         .catch(err => {
             console.log(err.response.data.message)
+            setLoading(false)
             setError(err.response.data.message)
         })
     }
@@ -141,6 +160,7 @@ const Login = () => {
                     />
                 </label>
                 <button>Login</button>
+                {loading && <div className='loader'></div>}
                 {error && <h3>- {error} -</h3>}
             </form>
         </StyledLogin>
