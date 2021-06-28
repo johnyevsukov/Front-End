@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import styled from 'styled-components'
 import Comments from './Comments'
+import EditPost from './EditPost'
 
 
 const StyledPost = styled.div`
@@ -58,6 +59,7 @@ const Post = (props) => {
     const [userId, setUserId] = useState(1)
     const [username, setUsername] = useState()
     const [comments, setComments] = useState(false)
+    const [edit, setEdit] = useState(false)
 
     useEffect(() => {
         axiosWithAuth()
@@ -75,17 +77,25 @@ const Post = (props) => {
         setComments(!comments)
     }
 
+    const toggleEdit = () => {
+        setEdit(!edit)
+    }
+
     return (
         <StyledPost>
-            <div>
-                <h3>{username}:</h3>
-                <p>{post.post_text}</p>
-            </div>
             {
-                post.user_id == userId &&
+                !edit ?
+                <div>
+                    <h3>{username}:</h3>
+                    <p>{post.post_text}</p>
+                </div>
+                : <EditPost toggleEdit={toggleEdit} username={username} post={post.post_text}/>
+            }
+            {
+                (post.user_id == userId && !edit) &&
                 <div className='buttons'>
                     <button className={'delete'}>delete ❌</button>
-                    <button className={'edit'}>edit ✏️</button>
+                    <button onClick={toggleEdit} className={'edit'}>edit ✏️</button>
                 </div>
             }
             <div className='more'>
