@@ -3,6 +3,12 @@ import styled from 'styled-components'
 
 
 const StyledComment = styled.div`
+background-color: #f2f2f2;
+width: 70%;
+border-radius: 10px;
+margin-top: 2%;
+margin-bottom: 2%;
+
 #name {
     font-weight: bold;
 }

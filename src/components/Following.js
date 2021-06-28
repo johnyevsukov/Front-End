@@ -51,7 +51,7 @@ const Following = () => {
 
     return (
         <StyledFollowing>
-            <h3>Following:</h3>
+            <h3>({following.length}) Following:</h3>
             {
                 following.map(user => {
                     return <UserCard key={user.user_id} user={user} />

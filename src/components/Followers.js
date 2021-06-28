@@ -9,6 +9,7 @@ const StyledFollowers = styled.div`
 border: 2px solid gray;
 width: 90%;
 height: 20%;
+overflow: scroll;
 
 .loader {
     border: 16px solid #f3f3f3;
@@ -46,7 +47,7 @@ const Followers = () => {
 
     return (
         <StyledFollowers>
-            <h3>Followers:</h3>
+            <h3>({followers.length}) Followers:</h3>
             {
                 followers.map(user => {
                     return <UserCard key={user.user_id} user={user} />

@@ -4,6 +4,13 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import styled from 'styled-components'
 import Comment from './Comment'
 
+
+const StyledComments = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+`
+
 const Comments = (props) => {
     const [comments, setComments] = useState([])
     const { postId } = props
@@ -21,13 +28,13 @@ const Comments = (props) => {
     }, [])
 
     return (
-        <div>
+        <StyledComments>
             {
                 comments.map(comment => {
-                    return <Comment name={comment.username} text={comment.comment_text}/>
+                    return <Comment key={comment.comment_id} name={comment.username} text={comment.comment_text}/>
                 })
             }
-        </div>
+        </StyledComments>
     )
 }
 
