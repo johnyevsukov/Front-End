@@ -55,7 +55,7 @@ border-radius: 8px;
 `
 
 const Post = (props) => {
-    const { post } = props
+    const [post, setPost] = useState(props.post)
     const [userId, setUserId] = useState(1)
     const [username, setUsername] = useState()
     const [comments, setComments] = useState(false)
@@ -73,6 +73,12 @@ const Post = (props) => {
         })
     }, [])
 
+    const handleDelete = () => {
+        props.setPosts(props.posts.filter(p => {
+            return p.post_id != post.post_id
+        }))
+    }
+
     const toggleComments = () => {
         setComments(!comments)
     }
@@ -89,12 +95,12 @@ const Post = (props) => {
                     <h3>{username}:</h3>
                     <p>{post.post_text}</p>
                 </div>
-                : <EditPost toggleEdit={toggleEdit} username={username} post={post.post_text}/>
+                : <EditPost toggleEdit={toggleEdit} username={username} post={post.post_text} id={post.post_id} setPost={setPost}/>
             }
             {
                 (post.user_id == userId && !edit) &&
                 <div className='buttons'>
-                    <button className={'delete'}>delete ❌</button>
+                    <button onClick ={handleDelete} className={'delete'}>delete ❌</button>
                     <button onClick={toggleEdit} className={'edit'}>edit ✏️</button>
                 </div>
             }

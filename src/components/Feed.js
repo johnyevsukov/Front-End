@@ -34,7 +34,7 @@ const Feed = () => {
         <StyledFeed>
             {
                 posts.map(post => {
-                    return <Post key={post.post_id} post={post}/>
+                    return <Post key={post.post_id} post={post} setPosts={setPosts} posts={posts}/>
                 })
             }
         </StyledFeed>
