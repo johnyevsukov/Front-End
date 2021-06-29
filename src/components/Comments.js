@@ -14,7 +14,7 @@ align-items: center;
 
 const Comments = (props) => {
     const [comments, setComments] = useState([])
-    const { postId } = props
+    const { postId, postUserId, userId } = props
 
     useEffect(() => {
         axiosWithAuth()
@@ -32,7 +32,7 @@ const Comments = (props) => {
         <StyledComments>
             {
                 comments.map(comment => {
-                    return <Comment key={comment.comment_id} name={comment.username} text={comment.comment_text} />
+                    return <Comment key={comment.comment_id} userId={userId} postUserId={postUserId} name={comment.username} text={comment.comment_text} commentUserId={comment.user_id} />
                 })
             }
             <CommentForm postId={postId} comments={comments} setComments={setComments} />

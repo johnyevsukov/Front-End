@@ -116,7 +116,7 @@ const Post = (props) => {
                 <p>likes: 0</p>
                 <span onClick={toggleComments}>comments {comments ? '▲' : '▼'}</span>
             </div>
-            {comments && <Comments postId={post.post_id}/>}
+            {comments && <Comments userId={userId} postId={post.post_id} postUserId={post.user_id}/>}
         </StyledPost>
     )
 }
