@@ -55,6 +55,11 @@ form {
         outline: none;
     }
 
+    input[name='password'] {
+        -webkit-text-security: disc;
+        text-security: disc;
+    }
+
     button {
         width: 20%;
         height: 4vh;
@@ -152,7 +157,7 @@ const Login = () => {
                 <label>
                     Password:
                     <input
-                    type='text'
+                    type='password'
                     name='password'
                     value={formValues.password}
                     onChange={handleChange}
