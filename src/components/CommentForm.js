@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
+import axiosWithAuth from '../Utils/axiosWithAuth'
+import Comments from './Comments'
 
 
 const StyledCommentForm = styled.div`
@@ -21,28 +23,46 @@ label {
 }
 `
 
-const initialFormValue = {
-    comment_text: ''
+const initialFormValues = {
+    comment_text: '',
+    user_id: ''
 }
 
-const CommentForm = () => {
-    const [formValue, setFormValue] = useState(initialFormValue)
+const CommentForm = (props) => {
+    const [formValues, setFormValues] = useState(initialFormValues)
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setFormValue({
-            ...formValue,
+        setFormValues({
+            ...formValues,
             [name]: value
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const comment = {
+            ...formValues,
+            user_id: 1
+        }
+        axiosWithAuth()
+        .post(`posts/${props.postId}/comments`, comment)
+        .then(res => {
+            console.log(res.data)
+            setFormValues(initialFormValues)
+            props.setComments([
+                ...props.comments,
+                res.data
+            ])
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
     }
 
     return (
         <StyledCommentForm>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>
                     comment..
                     <input
@@ -50,6 +70,7 @@ const CommentForm = () => {
                     name='comment_text'
                     onChange={handleChange}
                     placeholder='say something..'
+                    value={formValues.comment_text}
                     />
                 </label>
                 <button>comment</button>
