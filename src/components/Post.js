@@ -74,9 +74,17 @@ const Post = (props) => {
     }, [])
 
     const handleDelete = () => {
-        props.setPosts(props.posts.filter(p => {
-            return p.post_id != post.post_id
-        }))
+        axiosWithAuth()
+        .delete(`posts/${post.post_id}`)
+        .then(res => {
+            props.setPosts(props.posts.filter(p => {
+                return p.post_id != post.post_id
+            }))
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     const toggleComments = () => {

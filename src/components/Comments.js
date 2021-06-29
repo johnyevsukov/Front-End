@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import styled from 'styled-components'
 import Comment from './Comment'
+import CommentForm from './CommentForm'
 
 
 const StyledComments = styled.div`
@@ -34,6 +35,7 @@ const Comments = (props) => {
                     return <Comment key={comment.comment_id} name={comment.username} text={comment.comment_text}/>
                 })
             }
+            <CommentForm />
         </StyledComments>
     )
 }
