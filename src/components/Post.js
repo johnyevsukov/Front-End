@@ -14,6 +14,11 @@ margin-bottom: 2%;
 width: 70%;
 border-radius: 8px;
 
+.error {
+    color: red;
+    
+}
+
 .time {
     color: gray;
 }
@@ -65,6 +70,7 @@ const Post = (props) => {
     const [username, setUsername] = useState()
     const [comments, setComments] = useState(false)
     const [edit, setEdit] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         axiosWithAuth()
@@ -126,7 +132,8 @@ const Post = (props) => {
                 <p>likes: 0</p>
                 <span onClick={toggleComments}>comments {comments ? '▲' : '▼'}</span>
             </div>
-            {comments && <Comments userId={userId} postId={post.post_id} postUserId={post.user_id}/>}
+            {error && <h3 className='error'>Oops. This post may have been deleted.</h3>}
+            {comments && <Comments setError={setError} userId={userId} postId={post.post_id} postUserId={post.user_id}/>}
         </StyledPost>
     )
 }

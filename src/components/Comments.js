@@ -30,7 +30,7 @@ align-items: center;
 const Comments = (props) => {
     const [comments, setComments] = useState([])
     const [loading, setLoading] = useState(false)
-    const { postId, postUserId, userId } = props
+    const { postId, postUserId, userId, setError } = props
 
     useEffect(() => {
         setLoading(true)
@@ -61,7 +61,7 @@ const Comments = (props) => {
                     />
                 })
             }
-            <CommentForm postId={postId} comments={comments} setComments={setComments} />
+            <CommentForm setError={setError} postId={postId} comments={comments} setComments={setComments} />
         </StyledComments>
     )
 }

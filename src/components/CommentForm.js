@@ -30,6 +30,7 @@ const initialFormValues = {
 
 const CommentForm = (props) => {
     const [formValues, setFormValues] = useState(initialFormValues)
+    const { setError } = props
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -56,6 +57,8 @@ const CommentForm = (props) => {
             ])
         })
         .catch(err => {
+            setError(true)
+            setFormValues(initialFormValues)
             console.log(err.response)
         })
     }
