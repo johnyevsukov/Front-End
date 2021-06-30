@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
+import axiosWithAuth from '../Utils/axiosWithAuth'
 
 
 const StyledCreatePost = styled.div`
@@ -35,7 +36,7 @@ const intialFormValue = {
     post_text: ''
 }
 
-const CreatePost = () => {
+const CreatePost = (props) => {
     const [formValue, setFormValue] = useState(intialFormValue)
 
     const onChange = (e) => {
@@ -48,6 +49,19 @@ const CreatePost = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        axiosWithAuth()
+        .post('posts', formValue)
+        .then(res => {
+            console.log(res.data)
+            props.setPosts([
+                res.data,
+                ...props.posts
+            ])
+            setFormValue(intialFormValue)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return (

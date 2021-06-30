@@ -52,7 +52,7 @@ const Feed = () => {
     return (
         <StyledFeed>
             {loading && <div className='loader'></div>}
-            <CreatePost />
+            <CreatePost posts={posts} setPosts={setPosts}/>
             {
                 posts.map(post => {
                     return <Post key={post.post_id} post={post} setPosts={setPosts} posts={posts}/>
