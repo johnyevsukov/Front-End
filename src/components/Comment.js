@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
+import { useState } from 'react'
+import EditComment from './EditComment'
 
 
 const StyledComment = styled.div`
@@ -27,34 +29,45 @@ margin-bottom: 2%;
 `
 
 const Comment = (props) => {
-    const { name, text, postUserId, userId, commentUserId } = props
+    const [edit, setEdit] = useState(false)
+    const [comment, setComment] = useState(props.comment)
+    const { postUserId, userId, comments, setComments } = props
 
     const handleDelete = () => {
         console.log('delete')
         axiosWithAuth()
-        .delete()
+        .delete(`comments/${comment.comment_id}`)
         .then(res => {
-
+            console.log(res)
+            setComments(comments.filter(c => {
+                return c.comment_id != comment.comment_id
+            }))
         })
         .catch(err => {
-            
+            console.log(err)
         })
+    }
+
+    const toggleEdit = () => {
+        setEdit(!edit)
     }
 
     return (
         <StyledComment>
-            <p id='name'>{name} says..</p>
-            <p>{text}</p>
-            <div className='buttonDiv'>
-            {
-                ((postUserId === userId) || (commentUserId === userId)) && 
-                <button onClick={handleDelete} >delete</button>
+            <p id='name'>{comment.username} says..</p>
+            {!edit ? <p>{comment.comment_text}</p> : <EditComment id={comment.comment_id} comment={comment.comment_text} toggleEdit={toggleEdit} setComment={setComment}/>}
+            {!edit &&
+                <div className='buttonDiv'>
+                {
+                    ((postUserId === userId) || (comment.user_id === userId)) && 
+                    <button onClick={handleDelete} >delete</button>
+                }
+                {
+                    ((comment.user_id === userId)) && 
+                    <button onClick={toggleEdit} >edit</button>
+                }
+                </div>
             }
-            {
-                ((commentUserId === userId)) && 
-                <button>edit</button>
-            }
-            </div>
         </StyledComment>
     )
 }

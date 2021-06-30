@@ -32,7 +32,14 @@ const Comments = (props) => {
         <StyledComments>
             {
                 comments.map(comment => {
-                    return <Comment key={comment.comment_id} userId={userId} postUserId={postUserId} name={comment.username} text={comment.comment_text} commentUserId={comment.user_id} />
+                    return <Comment 
+                    key={comment.comment_id} 
+                    comments={comments} 
+                    setComments={setComments} 
+                    userId={userId} 
+                    postUserId={postUserId} 
+                    comment={comment}
+                    />
                 })
             }
             <CommentForm postId={postId} comments={comments} setComments={setComments} />
