@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Post from './Post'
 import { useEffect, useState } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
+import CreatePost from './CreatePost'
 
 
 const StyledFeed = styled.div`
@@ -51,6 +52,7 @@ const Feed = () => {
     return (
         <StyledFeed>
             {loading && <div className='loader'></div>}
+            <CreatePost />
             {
                 posts.map(post => {
                     return <Post key={post.post_id} post={post} setPosts={setPosts} posts={posts}/>

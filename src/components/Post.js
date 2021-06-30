@@ -4,6 +4,7 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import styled from 'styled-components'
 import Comments from './Comments'
 import EditPost from './EditPost'
+import * as timeago from 'timeago.js'
 
 
 const StyledPost = styled.div`
@@ -12,6 +13,10 @@ margin-top: 2%;
 margin-bottom: 2%;
 width: 70%;
 border-radius: 8px;
+
+.time {
+    color: gray;
+}
 
 .buttons {
     display: flex;
@@ -102,6 +107,11 @@ const Post = (props) => {
                 <div>
                     <h3>{username}:</h3>
                     <p>{post.post_text}</p>
+                    <p className='time'>{timeago.format(post.created_at)}</p>
+                    {/* {
+                        timeago.format(post.created_at) != timeago.format(post.updated_at) &&
+                        <p className='time'>{timeago.format(post.updated_at)}</p>
+                    } */}
                 </div>
                 : <EditPost toggleEdit={toggleEdit} username={username} post={post.post_text} id={post.post_id} setPost={setPost}/>
             }
