@@ -21,11 +21,12 @@ form {
     align-items: center;
 
     button {
+        background-color: white;
         border-radius: 5px;
-        outline: none;
-        border: none;
+        border: 1px solid gray;
         width: 20%;
-        margin-top: 3%;
+        margin-top: 1%;
+        margin-bottom: 1%;
     }
 }
 

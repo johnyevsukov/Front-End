@@ -24,6 +24,24 @@ margin-bottom: 2%;
 
     button {
         margin-bottom: 8%;
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid gray;
+        background-color: white;
+    }
+
+    .delete {
+        &:hover {
+            background-color: pink;
+            border: 1px outset red;
+        }
+    }
+
+    .edit {
+        &:hover {
+            background-color: #fff78c;
+            border: 1px outset #eddd00;
+        }
     }
 }
 `
@@ -60,11 +78,11 @@ const Comment = (props) => {
                 <div className='buttonDiv'>
                 {
                     ((postUserId === userId) || (comment.user_id === userId)) && 
-                    <button onClick={handleDelete} >delete</button>
+                    <button onClick={handleDelete} className='delete' >delete</button>
                 }
                 {
                     ((comment.user_id === userId)) && 
-                    <button onClick={toggleEdit} >edit</button>
+                    <button onClick={toggleEdit} className='edit' >edit</button>
                 }
                 </div>
             }
