@@ -49,14 +49,15 @@ margin-bottom: 2%;
 const Comment = (props) => {
     const [edit, setEdit] = useState(false)
     const [comment, setComment] = useState(props.comment)
+    const [loading, setLoading] = useState(false)
     const { postUserId, userId, comments, setComments } = props
 
     const handleDelete = () => {
-        console.log('delete')
+        setLoading(true)
         axiosWithAuth()
         .delete(`comments/${comment.comment_id}`)
         .then(res => {
-            console.log(res)
+            setLoading(false)
             setComments(comments.filter(c => {
                 return c.comment_id != comment.comment_id
             }))

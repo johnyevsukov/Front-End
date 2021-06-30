@@ -11,11 +11,21 @@ align-items: center;
 border: 2px solid gray;
 height: 95vh;
 width: 30%;
+background-color: #6ba6ed;
+
+.header {
+    border: 1px solid black;
+    width: 100%;
+    margin-bottom: 5%;
+}
 `
 
 const RightBar = () => {
     return (
         <StyledRightBar>
+            <div className='header'>
+                <h2>My Connections:</h2>
+            </div>
             <Following />
             <Followers />
         </StyledRightBar>

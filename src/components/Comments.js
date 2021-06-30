@@ -10,17 +10,35 @@ const StyledComments = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 1vh;
+    height: 1vh;
+    animation: spin 2s linear infinite;
+    margin-top: 2%;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 `
 
 const Comments = (props) => {
     const [comments, setComments] = useState([])
+    const [loading, setLoading] = useState(false)
     const { postId, postUserId, userId } = props
 
     useEffect(() => {
+        setLoading(true)
         axiosWithAuth()
         .get(`posts/${postId}/comments`)
         .then(res => {
             console.log(res.data)
+            setLoading(false)
             setComments(res.data)
         })
         .catch(err => {
@@ -30,6 +48,7 @@ const Comments = (props) => {
 
     return (
         <StyledComments>
+            {loading && <div className='loader'></div>}
             {
                 comments.map(comment => {
                     return <Comment 

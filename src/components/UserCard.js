@@ -8,6 +8,12 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+height: 50%;
+width: 50%;
+
+&:hover {
+    color: white;
+}
 
 img {
     width: 25px;

@@ -9,7 +9,16 @@ const StyledFollowing = styled.div`
 border: 2px solid gray;
 width: 90%;
 height: 20%;
-overflow: scroll;
+margin-bottom: 10%;
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: 80%;
+    overflow: scroll;
+    border: 1px solid black
+}
 
 .loader {
     border: 16px solid #f3f3f3;
@@ -18,6 +27,7 @@ overflow: scroll;
     width: 1vh;
     height: 1vh;
     animation: spin 2s linear infinite;
+    margin: auto;
     margin-top: 2%;
   }
   
@@ -27,7 +37,12 @@ overflow: scroll;
   }
 
   h3 {
-      position: sticky;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      height: 20%;
+      margin: auto;
   }
 `
 
@@ -52,12 +67,14 @@ const Following = () => {
     return (
         <StyledFollowing>
             <h3>({following.length}) Following:</h3>
+            <div className='list'>
+            {loading && <div className='loader'></div>}
             {
                 following.map(user => {
                     return <UserCard key={user.user_id} user={user} />
                 })
             }
-            {loading && <div className='loader'></div>}
+            </div>
         </StyledFollowing>
     )
 }
