@@ -4,10 +4,17 @@ import NavBar from './NavBar'
 import RightBar from './RightBar'
 import Feed from './Feed'
 import styled from 'styled-components'
+import UserAbout from './UserAbout'
 
 
 const StyledContent = styled.div`
 display: flex;
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
 `
 
 const Profile = () => {
@@ -17,7 +24,10 @@ const Profile = () => {
         <div>
             <NavBar />
             <StyledContent>
-                <Feed feedEndpoint={`users/${id}/posts`}/>
+                <div className='profile'>
+                    <UserAbout />
+                    <Feed feedEndpoint={`users/${id}/posts`}/>
+                </div>
                 <RightBar profileId={id}/>
             </StyledContent>
         </div>

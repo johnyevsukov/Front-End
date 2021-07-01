@@ -64,8 +64,16 @@ const NavBar = () => {
 
     const logout = () => {
         localStorage.removeItem('token')
-        localStorage.setItem('user_id')
+        localStorage.removeItem('user_id')
         push('/')
+    }
+
+    const goToProfile = () => {
+        push(`/profile/${localStorage.getItem('user_id')}`)
+    }
+
+    const goToFeed = () => {
+        push('/timeline')
     }
 
     return (
@@ -79,7 +87,8 @@ const NavBar = () => {
                 <button>search</button>
             </form>
             <div className='buttons'>
-                <button>Profile</button>
+                <button onClick={goToProfile}>Profile</button>
+                <button onClick={goToFeed}>Feed</button>
                 <button onClick={logout}>Logout</button>
             </div>
         </StyledNavBar>

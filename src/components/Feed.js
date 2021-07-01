@@ -55,7 +55,7 @@ const Feed = (props) => {
         <StyledFeed>
             {loading && <div className='loader'></div>}
             {
-                id == localStorage.getItem('user_id') || id == undefined &&
+                (id == localStorage.getItem('user_id') || id == undefined) &&
                 <CreatePost posts={posts} setPosts={setPosts}/>
             }
             {
