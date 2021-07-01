@@ -20,14 +20,16 @@ background-color: #6ba6ed;
 }
 `
 
-const RightBar = () => {
+const RightBar = (props) => {
+    const { profileId } = props
+
     return (
         <StyledRightBar>
             <div className='header'>
-                <h2>My Connections:</h2>
+                <h2>Connections:</h2>
             </div>
-            <Following />
-            <Followers />
+            <Following profileId={profileId}/>
+            <Followers profileId={profileId}/>
         </StyledRightBar>
     )
 }

@@ -66,7 +66,7 @@ border-radius: 8px;
 
 const Post = (props) => {
     const [post, setPost] = useState(props.post)
-    const [userId, setUserId] = useState(1)
+    const [userId, setUserId] = useState(parseInt(localStorage.getItem('user_id')))
     const [username, setUsername] = useState()
     const [comments, setComments] = useState(false)
     const [edit, setEdit] = useState(false)
@@ -82,7 +82,7 @@ const Post = (props) => {
         .catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [post.user_id])
 
     const handleDelete = () => {
         axiosWithAuth()

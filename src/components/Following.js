@@ -46,14 +46,14 @@ margin-bottom: 10%;
   }
 `
 
-const Following = () => {
+const Following = (props) => {
     const [following, setFollowing] = useState([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setLoading(true)
         axiosWithAuth()
-        .get(`users/${1}/following`)
+        .get(`users/${props.profileId}/following`)
         .then(res => {
             console.log(res.data)
             setLoading(false)
@@ -62,7 +62,7 @@ const Following = () => {
         .catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [props.profileId])
 
     return (
         <StyledFollowing>

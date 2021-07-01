@@ -4,6 +4,7 @@ import Post from './Post'
 import { useEffect, useState } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import CreatePost from './CreatePost'
+import { useParams } from 'react-router-dom'
 
 
 const StyledFeed = styled.div`
@@ -31,14 +32,15 @@ overflow: scroll;
   }
 `
 
-const Feed = () => {
+const Feed = (props) => {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
+    const { id } = useParams()
 
     useEffect(() => {
         setLoading(true)
         axiosWithAuth()
-        .get('posts/timeline/feed')
+        .get(`${props.feedEndpoint}`)
         .then(res => {
             console.log(res.data)
             setLoading(false)
@@ -47,12 +49,15 @@ const Feed = () => {
         .catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [props.feedEndpoint])
 
     return (
         <StyledFeed>
             {loading && <div className='loader'></div>}
-            <CreatePost posts={posts} setPosts={setPosts}/>
+            {
+                id == localStorage.getItem('user_id') || id == undefined &&
+                <CreatePost posts={posts} setPosts={setPosts}/>
+            }
             {
                 posts.map(post => {
                     return <Post key={post.post_id} post={post} setPosts={setPosts} posts={posts}/>

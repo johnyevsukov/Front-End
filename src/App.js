@@ -1,11 +1,11 @@
 import './App.css';
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import axios from 'axios'
 import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import TimeLine from './components/TimeLine'
+import Profile from './components/Profile'
 import PrivateRoute from './components/PrivateRoute'
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Register />
         </Route>
         <PrivateRoute path='/timeline' component={TimeLine} />
+        <PrivateRoute path='/profile/:id' component={Profile} />
       </Switch>
     </div>
   );

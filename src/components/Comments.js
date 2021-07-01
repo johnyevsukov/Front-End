@@ -44,7 +44,7 @@ const Comments = (props) => {
         .catch(err => {
             console.log(err.response)
         })
-    }, [])
+    }, [postId])
 
     return (
         <StyledComments>

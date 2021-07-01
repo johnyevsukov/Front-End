@@ -14,8 +14,8 @@ const TimeLine = () => {
         <div>
             <NavBar />
             <StyledContent>
-                <Feed />
-                <RightBar />
+                <Feed feedEndpoint={'posts/timeline/feed'}/>
+                <RightBar profileId={localStorage.getItem('user_id')}/>
             </StyledContent>
         </div>
     )

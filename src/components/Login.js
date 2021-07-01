@@ -131,6 +131,7 @@ const Login = () => {
             console.log(res)
             setLoading(false)
             localStorage.setItem('token', res.data.token)
+            localStorage.setItem('user_id', res.data.user_id)
             push('/timeline')
         })
         .catch(err => {

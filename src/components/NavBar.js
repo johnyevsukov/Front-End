@@ -64,6 +64,7 @@ const NavBar = () => {
 
     const logout = () => {
         localStorage.removeItem('token')
+        localStorage.setItem('user_id')
         push('/')
     }
 
