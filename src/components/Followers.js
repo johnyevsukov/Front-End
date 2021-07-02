@@ -12,6 +12,39 @@ width: 90%;
 height: 20%;
 margin-bottom: 10%;
 
+.connectButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    width: 100%;
+    background-color: #3080ff;
+
+    button {
+        width: 50%;
+        border-radius: 8px;
+        border: 1px solid white;
+        transition: transform .2s;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    .unfollow {
+        &:hover {
+            background-color: pink;
+            border: 1px solid red;
+        }
+    }
+
+    .follow {
+        &:hover {
+            background-color: lightgreen;
+            border: 1px solid green;
+        }
+    }
+}
+
 .list {
     display: flex;
     flex-wrap: wrap;
@@ -68,7 +101,7 @@ const Followers = (props) => {
 
     const handleUnfollow = () => {
         axiosWithAuth()
-        .delete(``)
+        .delete(`users/${localStorage.getItem('user_id')}/unfollow/${id}`)
         .then(res => {
             setFollowers(res.data)
         })
@@ -79,7 +112,7 @@ const Followers = (props) => {
 
     const handleFollow = () => {
         axiosWithAuth()
-        .post(``)
+        .post(`users/${parseInt(localStorage.getItem('user_id'))}/follow`, {following_id: id})
         .then(res => {
             setFollowers(res.data)
         })
@@ -103,8 +136,8 @@ const Followers = (props) => {
                 <div className='connectButton'>
                     {
                         (followers.filter(f => f.user_id == localStorage.getItem('user_id')).length > 0) ?
-                        <button onClick={() => {}}>unfollow</button> :
-                        <button onClick={() => {}}>follow</button>
+                        <button className='unfollow' onClick={handleUnfollow}>unfollow</button> :
+                        <button className='follow' onClick={handleFollow}>follow</button>
                     }
                 </div>
             }
