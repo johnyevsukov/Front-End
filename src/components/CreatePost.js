@@ -28,6 +28,14 @@ form {
         width: 15%;
         margin-top: 2%;
         margin-bottom: 2%;
+        transition: .2s transform ease-in-out;
+        border-radius: 8px;
+        border: 1px solid gray;
+        &:hover {
+            transform: scale(1.2);
+            background-color: lightgreen;
+            border-radius: 6px;
+        }
     }
 }
 `

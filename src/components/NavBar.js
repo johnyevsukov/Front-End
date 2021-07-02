@@ -45,6 +45,19 @@ form {
     button {
         height: 80%;
         border-radius: 8px;
+        transition: transform .2s;
+        &:hover {
+            transform: scale(1.2);
+            background-color: white;
+            border: 1px solid gray;
+        }
+    }
+
+    .logout {
+        &:hover {
+            background-color: pink;
+            border: 1px solid red;
+        }
     }
 }
 
@@ -53,6 +66,9 @@ h3 {
     border: 2px solid gray;
     height: 60%;
     font-size: xx-large;
+    &:hover {
+        cursor: pointer;
+    }
 }
 `
 
@@ -78,7 +94,7 @@ const NavBar = () => {
 
     return (
         <StyledNavBar>
-            <h3>Petpost 🐹</h3>
+            <h3 onClick={goToFeed}>Petpost 🐹</h3>
             <form>
                 <input
                 type='text'
@@ -89,7 +105,7 @@ const NavBar = () => {
             <div className='buttons'>
                 <button onClick={goToProfile}>Profile</button>
                 <button onClick={goToFeed}>Feed</button>
-                <button onClick={logout}>Logout</button>
+                <button className='logout' onClick={logout}>Logout</button>
             </div>
         </StyledNavBar>
     )

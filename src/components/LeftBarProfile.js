@@ -15,8 +15,8 @@ width: 20%;
 background-color: #6ba6ed;
 
 img {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border: 2px solid white;
     border-radius: 20%;
 }

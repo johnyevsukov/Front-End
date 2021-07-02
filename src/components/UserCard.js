@@ -9,11 +9,14 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-height: 50%;
-width: 50%;
+height: 49%;
+width: 49%;
 
 &:hover {
     color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 img {

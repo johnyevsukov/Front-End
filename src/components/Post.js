@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Comments from './Comments'
 import EditPost from './EditPost'
 import * as timeago from 'timeago.js'
+import { useHistory } from 'react-router'
 
 
 const StyledPost = styled.div`
@@ -13,6 +14,15 @@ margin-top: 2%;
 margin-bottom: 2%;
 width: 70%;
 border-radius: 8px;
+
+h3 {
+    transition: transform .2s;
+    &:hover {
+        transform: scale(1.1);
+        color: #3b48ff;
+        cursor: pointer;
+    }
+}
 
 .error {
     color: red;
@@ -71,6 +81,7 @@ const Post = (props) => {
     const [comments, setComments] = useState(false)
     const [edit, setEdit] = useState(false)
     const [error, setError] = useState(false)
+    const { push } = useHistory()
 
     useEffect(() => {
         axiosWithAuth()
@@ -106,12 +117,16 @@ const Post = (props) => {
         setEdit(!edit)
     }
 
+    const goToUser = () => {
+        push(`/profile/${post.user_id}`)
+    }
+
     return (
         <StyledPost>
             {
                 !edit ?
                 <div>
-                    <h3>{username}:</h3>
+                    <h3 onClick={goToUser}>{username}:</h3>
                     <p>{post.post_text}</p>
                     <p className='time'>{timeago.format(post.created_at)}</p>
                     {/* {
