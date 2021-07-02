@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import UserCard from './UserCard'
+import { useParams, useparams } from 'react-router-dom'
 
 
 const StyledFollowers = styled.div`
@@ -49,6 +50,7 @@ margin-bottom: 10%;
 const Followers = (props) => {
     const [followers, setFollowers] = useState([])
     const [loading, setLoading] = useState(false)
+    const { id } = useParams()
 
     useEffect(() => {
         setLoading(true)
@@ -64,6 +66,28 @@ const Followers = (props) => {
         })
     }, [props.profileId])
 
+    const handleUnfollow = () => {
+        axiosWithAuth()
+        .delete(``)
+        .then(res => {
+            setFollowers(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const handleFollow = () => {
+        axiosWithAuth()
+        .post(``)
+        .then(res => {
+            setFollowers(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     return (
         <StyledFollowers>
             <h3>({followers.length}) Followers:</h3>
@@ -73,6 +97,16 @@ const Followers = (props) => {
                 followers.map(user => {
                     return <UserCard key={user.user_id} user={user} />
                 })
+            }
+            {
+                (id != localStorage.getItem('user_id') && id != undefined) &&
+                <div className='connectButton'>
+                    {
+                        (followers.filter(f => f.user_id == localStorage.getItem('user_id')).length > 0) ?
+                        <button onClick={() => {}}>unfollow</button> :
+                        <button onClick={() => {}}>follow</button>
+                    }
+                </div>
             }
             </div>
         </StyledFollowers>

@@ -10,7 +10,7 @@ flex-direction: column;
 align-items: center;
 border: 2px solid gray;
 height: 95vh;
-width: 30%;
+width: 20%;
 background-color: #6ba6ed;
 
 .header {

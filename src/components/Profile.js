@@ -1,20 +1,15 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import NavBar from './NavBar'
 import RightBar from './RightBar'
 import Feed from './Feed'
 import styled from 'styled-components'
-import UserAbout from './UserAbout'
+import LeftBarProfile from './LeftBarProfile'
+import axiosWithAuth from '../Utils/axiosWithAuth'
 
 
 const StyledContent = styled.div`
 display: flex;
-
-.profile {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-}
 `
 
 const Profile = () => {
@@ -24,10 +19,8 @@ const Profile = () => {
         <div>
             <NavBar />
             <StyledContent>
-                <div className='profile'>
-                    <UserAbout />
-                    <Feed feedEndpoint={`users/${id}/posts`}/>
-                </div>
+                <LeftBarProfile />
+                <Feed feedEndpoint={`users/${id}/posts`}/>
                 <RightBar profileId={id}/>
             </StyledContent>
         </div>
