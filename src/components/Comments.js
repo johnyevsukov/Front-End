@@ -1,7 +1,6 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import axiosWithAuth from '../Utils/axiosWithAuth'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import axiosWithAuth from '../Utils/axiosWithAuth'
 import Comment from './Comment'
 import CommentForm from './CommentForm'
 
@@ -28,16 +27,15 @@ align-items: center;
 `
 
 const Comments = (props) => {
+    const { postId, postUserId, userId, setError } = props
     const [comments, setComments] = useState([])
     const [loading, setLoading] = useState(false)
-    const { postId, postUserId, userId, setError } = props
 
     useEffect(() => {
         setLoading(true)
         axiosWithAuth()
         .get(`posts/${postId}/comments`)
         .then(res => {
-            console.log(res.data)
             setLoading(false)
             setComments(res.data)
         })
@@ -48,20 +46,26 @@ const Comments = (props) => {
 
     return (
         <StyledComments>
-            {loading && <div className='loader'></div>}
             {
                 comments.map(comment => {
                     return <Comment 
                     key={comment.comment_id} 
+                    comment={comment}
                     comments={comments} 
                     setComments={setComments} 
                     userId={userId} 
                     postUserId={postUserId} 
-                    comment={comment}
                     />
                 })
             }
-            <CommentForm setError={setError} postId={postId} comments={comments} setComments={setComments} />
+            {loading && <div className='loader'></div>}
+            <CommentForm
+            postId={postId}
+            comments={comments}
+            setComments={setComments}
+            setLoading={setLoading}
+            setError={setError}
+            />
         </StyledComments>
     )
 }

@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
-import { useState } from 'react'
 import EditComment from './EditComment'
 
 
@@ -12,9 +11,25 @@ border-radius: 10px;
 margin-top: 2%;
 margin-bottom: 2%;
 
-#name {
+.name {
     font-weight: bold;
 }
+
+.loader {
+    border: 8px solid #3498db;
+    border-top: 8px solid #f2f2f2;
+    border-radius: 50%;
+    width: .5vh;
+    height: .5vh;
+    animation: spin 1s linear infinite;
+    margin: auto;
+    margin-bottom: 2%;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
 .buttonDiv {
     display: flex;
@@ -47,17 +62,16 @@ margin-bottom: 2%;
 `
 
 const Comment = (props) => {
-    const [edit, setEdit] = useState(false)
-    const [comment, setComment] = useState(props.comment)
-    // const [loading, setLoading] = useState(false)
     const { postUserId, userId, comments, setComments } = props
+    const [comment, setComment] = useState(props.comment)
+    const [edit, setEdit] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleDelete = () => {
-        // setLoading(true)
+        setLoading(true)
         axiosWithAuth()
         .delete(`comments/${comment.comment_id}`)
-        .then(res => {
-            // setLoading(false)
+        .then(() => {
             setComments(comments.filter(c => {
                 return c.comment_id !== comment.comment_id
             }))
@@ -73,9 +87,20 @@ const Comment = (props) => {
 
     return (
         <StyledComment>
-            <p id='name'>{comment.username} says..</p>
-            {!edit ? <p>{comment.comment_text}</p> : <EditComment id={comment.comment_id} comment={comment.comment_text} toggleEdit={toggleEdit} setComment={setComment}/>}
-            {!edit &&
+            <p className='name'>{comment.username} says..</p>
+            {
+                !edit ? 
+                <p>{comment.comment_text}</p>
+                : <EditComment 
+                    id={comment.comment_id}
+                    comment={comment.comment_text}
+                    toggleEdit={toggleEdit}
+                    setComment={setComment}
+                    setLoading={setLoading}
+                    />
+            }
+            {
+                !edit &&
                 <div className='buttonDiv'>
                 {
                     ((postUserId === userId) || (comment.user_id === userId)) && 
@@ -87,6 +112,7 @@ const Comment = (props) => {
                 }
                 </div>
             }
+            {loading && <div className='loader'></div>}
         </StyledComment>
     )
 }

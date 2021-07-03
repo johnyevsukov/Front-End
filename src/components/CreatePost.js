@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 
 
@@ -45,6 +44,7 @@ const intialFormValue = {
 }
 
 const CreatePost = (props) => {
+    const { posts, setPosts, setLoading } = props
     const [formValue, setFormValue] = useState(intialFormValue)
 
     const onChange = (e) => {
@@ -57,13 +57,14 @@ const CreatePost = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
         axiosWithAuth()
         .post('posts', formValue)
         .then(res => {
-            console.log(res.data)
-            props.setPosts([
+            setLoading(false)
+            setPosts([
                 res.data,
-                ...props.posts
+                ...posts
             ])
             setFormValue(intialFormValue)
         })
@@ -78,10 +79,10 @@ const CreatePost = (props) => {
             <form onSubmit={handleSubmit}>
                 <input
                 type='text'
-                placeholder='my thoughts..'
-                onChange={onChange}
                 name='post_text'
+                placeholder='my thoughts..'
                 value={formValue.post_text}
+                onChange={onChange}
                 />
                 <button>share</button>
             </form>

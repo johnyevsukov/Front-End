@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 
 
@@ -28,25 +27,32 @@ form {
         margin-top: 1%;
         margin-bottom: 1%;
     }
-}
 
-.submit {
-    &:hover {
-        background-color: lightgreen;
-        border: 1px outset green;
+    .submit {
+        &:hover {
+            background-color: lightgreen;
+            border: 1px outset green;
+        }
     }
-}
-
-.cancel {
-    &:hover {
-        background-color: pink;
-        border: 1px outset red;
+    
+    .cancel {
+        &:hover {
+            background-color: pink;
+            border: 1px outset red;
+        }
     }
 }
 `
 
 const EditComment = (props) => {
-    const [formValue, setFormValue] = useState(props.comment)
+    const { 
+        comment,
+        setLoading,
+        setComment,
+        toggleEdit,
+        id 
+    } = props
+    const [formValue, setFormValue] = useState(comment)
 
     const handleChange = (e) => {
         const { value } = e.target
@@ -55,11 +61,13 @@ const EditComment = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
         axiosWithAuth()
-        .put(`comments/${props.id}`, {comment_text: formValue})
+        .put(`comments/${id}`, {comment_text: formValue})
         .then(res => {
-            props.setComment(res.data)
-            props.toggleEdit()
+            setLoading(false)
+            toggleEdit()
+            setComment(res.data)
         })
         .catch(err => {
             console.log(err)
@@ -71,13 +79,22 @@ const EditComment = (props) => {
             <form onSubmit={handleSubmit}>
                 <input
                 type='text'
-                value={formValue}
                 name='comment'
+                value={formValue}
                 onChange={handleChange}
                 />
                 <div className='buttons'>
-                    <button type='submit' className='submit'>submit</button>
-                    <button type='button' className='cancel' onClick={props.toggleEdit}>cancel</button>
+                    <button
+                    type='submit'
+                    className='submit'>
+                        submit
+                    </button>
+                    <button
+                    type='button'
+                    className='cancel'
+                    onClick={toggleEdit}>
+                        cancel
+                    </button>
                 </div>
             </form>
         </StyledEditComment>

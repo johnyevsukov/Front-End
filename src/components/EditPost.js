@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 
 
@@ -27,25 +26,26 @@ form {
         width: 20%;
         margin-top: 3%;
     }
-}
 
-.submit {
-    &:hover {
-        background-color: lightgreen;
-        border: 1px outset green;
+    .submit {
+        &:hover {
+            background-color: lightgreen;
+            border: 1px outset green;
+        }
     }
-}
-
-.cancel {
-    &:hover {
-        background-color: pink;
-        border: 1px outset red;
+    
+    .cancel {
+        &:hover {
+            background-color: pink;
+            border: 1px outset red;
+        }
     }
 }
 `
 
 const EditPost = (props) => {
-    const [formValue, setFormValue] = useState(props.post)
+    const { post, setPost, toggleEdit, username, id } = props
+    const [formValue, setFormValue] = useState(post)
 
     const handleChange = (e) => {
         const { value } = e.target
@@ -55,10 +55,10 @@ const EditPost = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         axiosWithAuth()
-        .put(`posts/${props.id}`, {post_text: formValue})
+        .put(`posts/${id}`, {post_text: formValue})
         .then(res => {
-            props.setPost(res.data)
-            props.toggleEdit()
+            setPost(res.data)
+            toggleEdit()
         })
         .catch(err => {
             console.log(err)
@@ -67,17 +67,26 @@ const EditPost = (props) => {
 
     return (
         <StyledEditPost>
-            <h3>{props.username}:</h3>
+            <h3>{username}:</h3>
             <form onSubmit={handleSubmit}>
                 <input
                 type='text'
-                value={formValue}
                 name='post'
+                value={formValue}
                 onChange={handleChange}
                 />
                 <div className='buttons'>
-                    <button type='submit' className='submit'>submit</button>
-                    <button type='button' className='cancel' onClick={props.toggleEdit}>cancel</button>
+                    <button
+                    type='submit'
+                    className='submit'>
+                        submit
+                    </button>
+                    <button 
+                    type='button'
+                    className='cancel'
+                    onClick={props.toggleEdit}>
+                        cancel
+                    </button>
                 </div>
             </form>
         </StyledEditPost>

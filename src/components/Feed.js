@@ -53,11 +53,11 @@ const Feed = (props) => {
 
     return (
         <StyledFeed>
-            {loading && <div className='loader'></div>}
             {
                 (id === parseInt(localStorage.getItem('user_id')) || id === undefined) &&
-                <CreatePost posts={posts} setPosts={setPosts}/>
+                <CreatePost setLoading={setLoading} posts={posts} setPosts={setPosts}/>
             }
+            {loading && <div className='loader'></div>}
             {
                 posts.map(post => {
                     return <Post key={post.post_id} post={post} setPosts={setPosts} posts={posts}/>
