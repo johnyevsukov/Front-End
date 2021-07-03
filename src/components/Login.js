@@ -43,7 +43,7 @@ form {
         margin-bottom: 2%;
         text-align: left;
         width: 40%;
-        height: 5vh;
+        height: 65px;
         font-size: large;
         font-weight: bold;
     }
@@ -53,6 +53,7 @@ form {
         font-size: medium;
         border-radius: 8px;
         outline: none;
+        width: 25vw;
     }
 
     input[name='password'] {
@@ -67,14 +68,9 @@ form {
         font-size: large;
         background-color: #fafdff;
         margin-top: 2%;
-        &:hover {
-            background-color: #006aff;
-            color: white;
-            transform: scale(1.1);
-            transition: all .2s ease-in-out;
+        &:active {
+            background-color: #ededed;
         }
-
-        transition: all .2s ease-in-out;
     }
 
     h1 {
@@ -100,6 +96,39 @@ form {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
+}
+
+@media (max-width: 1600px) {
+
+}
+
+@media (max-width: 1224px) {
+
+}
+
+@media (min-width: 1224px) {  
+    button {    
+        &:hover {
+            background-color: #006aff;
+            color: white;
+            transform: scale(1.1);
+            transition: all .2s ease-in-out;
+        }
+        transition: all .2s ease-in-out;
+    }
+}
+
+@media (max-width: 680px) {
+    form {
+        input {
+            width: 50vw;
+        }
+        button {
+            height: 8vh;
+            margin-top: 5%;
+            width: 80%
+        }
+    }
 }
 `
 
@@ -128,7 +157,6 @@ const Login = () => {
         setLoading(true)
         axios.post('https://pet-post.herokuapp.com/api/auth/login', formValues)
         .then(res => {
-            console.log(res)
             setLoading(false)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user_id', res.data.user_id)
@@ -145,14 +173,15 @@ const Login = () => {
         <StyledLogin>
             <form onSubmit={handleSubmit}>
                 <h1>Welcome Back, Buddy!</h1>
+                <div>
                 <label>
                     Username:
                     <input
                     type='text'
                     name='username'
+                    placeholder='Username..'
                     value={formValues.username}
                     onChange={handleChange}
-                    placeholder='Username..'
                     />
                 </label>
                 <label>
@@ -160,11 +189,12 @@ const Login = () => {
                     <input
                     type='password'
                     name='password'
+                    placeholder='Password..'
                     value={formValues.password}
                     onChange={handleChange}
-                    placeholder='Password..'
                     />
                 </label>
+                </div>
                 <button>Login</button>
                 {loading && <div className='loader'></div>}
                 {error && <h3>- {error} -</h3>}
