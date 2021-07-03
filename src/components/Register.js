@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
 
 
 const StyledRegister = styled.div`
@@ -93,6 +94,7 @@ const initialFormValues = {
 const Register = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
     const [error, setError] = useState()
+    const { push } = useHistory()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -112,6 +114,9 @@ const Register = () => {
             })
             .then(res => {
                 console.log(res)
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('user_id', res.data.user_id)
+                push('/timeline')
             })
             .catch(err => {
                 setError(err.response.data.message)
