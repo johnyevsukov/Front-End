@@ -8,12 +8,12 @@ const StyledNavBar = styled.div`
 display: flex;
 justify-content: space-evenly;
 align-items: center;
-height: 5vh;
+height: 63px;
 background-color: #408eed;
-border: 2px solid gray;
+border-bottom: 2px solid #1f7ced;
 
 form {
-    width: 60%;
+    width: 50%;
     border: 2px solid gray;
     height: 60%;
     align-items: center;
@@ -63,9 +63,10 @@ form {
 
 h3 {
     width: 20%;
-    border: 2px solid gray;
     height: 60%;
     font-size: xx-large;
+    background: linear-gradient(270deg, white, #408eed);
+    border-radius: 20px;
     &:hover {
         cursor: pointer;
     }

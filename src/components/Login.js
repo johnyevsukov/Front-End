@@ -103,7 +103,11 @@ form {
 }
 
 @media (max-width: 1224px) {
-
+    form {
+        button {
+            height: 7vh;
+        }
+    }
 }
 
 @media (min-width: 1224px) {  

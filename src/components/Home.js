@@ -62,6 +62,11 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
 }
 
 @media (max-width: 1224px) {
+    #buttons {
+        button {
+            height: 8vh;
+        }
+    }
     .info {
         h1 {
             font-size: 60px;
@@ -76,7 +81,7 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
 
 @media (min-width: 1224px) {
     #buttons {    
-        button {    
+        button {   
             &:hover {
                 background-color: #006aff;
                 color: white;
