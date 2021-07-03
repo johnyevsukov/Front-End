@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
+// import { useState } from 'react'
 import { useHistory } from 'react-router'
 
 
@@ -72,10 +72,10 @@ h3 {
 }
 `
 
-const initialFormValue = ``
+// const initialFormValue = ``
 
 const NavBar = () => {
-    const [formValue, setFormValue] = useState(initialFormValue)
+    // const [formValue, setFormValue] = useState(initialFormValue)
     const { push } = useHistory()
 
     const logout = () => {

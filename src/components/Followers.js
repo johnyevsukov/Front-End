@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import UserCard from './UserCard'
-import { useParams, useparams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 
 const StyledFollowers = styled.div`
@@ -132,10 +132,10 @@ const Followers = (props) => {
                 })
             }
             {
-                (id != localStorage.getItem('user_id') && id != undefined) &&
+                (id !== parseInt(localStorage.getItem('user_id')) && id !== undefined) &&
                 <div className='connectButton'>
                     {
-                        (followers.filter(f => f.user_id == localStorage.getItem('user_id')).length > 0) ?
+                        (followers.filter(f => f.user_id === parseInt(localStorage.getItem('user_id'))).length > 0) ?
                         <button className='unfollow' onClick={handleUnfollow}>unfollow</button> :
                         <button className='follow' onClick={handleFollow}>follow</button>
                     }

@@ -66,17 +66,17 @@ img {
 const LeftBarProfile = (props) => {
     const { id } = useParams()
     const [user, setUser] = useState({})
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
     const [edit, setEdit] = useState(false)
     const [deleteUser, setDeleteUser] = useState(false)
     const { push } = useHistory()
 
     useEffect(() => {
-        setLoading(true)
+        // setLoading(true)
         axiosWithAuth()
         .get(`users/${id}`)
         .then(res => {
-            setLoading(false)
+            // setLoading(false)
             res.data.user_birthday ?
             setUser({
                 ...res.data,
@@ -113,7 +113,7 @@ const LeftBarProfile = (props) => {
         <StyledLeftBar>
             <div className='header'>
                 <h2>{user.username}</h2>
-                <img src={default_user}/>
+                <img src={default_user} alt='a'/>
                 {   !edit ?
                     <div>
                     <h3>About me:</h3>
@@ -122,7 +122,7 @@ const LeftBarProfile = (props) => {
                     <p>My birthday is {user.user_birthday || '..?'}</p>
                     <p>contact me at: {user.user_email}</p>
                     {
-                        localStorage.getItem('user_id') == id &&
+                        parseInt(localStorage.getItem('user_id')) === id &&
                         <div className='buttons'>
                             <button className='edit' onClick={toggleEdit}>edit profile</button>
                             {

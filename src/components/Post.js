@@ -100,7 +100,7 @@ const Post = (props) => {
         .delete(`posts/${post.post_id}`)
         .then(res => {
             props.setPosts(props.posts.filter(p => {
-                return p.post_id != post.post_id
+                return p.post_id !== post.post_id
             }))
             console.log(res.data)
         })
@@ -137,9 +137,9 @@ const Post = (props) => {
                 : <EditPost toggleEdit={toggleEdit} username={username} post={post.post_text} id={post.post_id} setPost={setPost}/>
             }
             {
-                (post.user_id == userId && !edit) &&
+                (post.user_id === userId && !edit) &&
                 <div className='buttons'>
-                    <button onClick ={handleDelete} className={'delete'}>delete ❌</button>
+                    <button onClick={handleDelete} className={'delete'}>delete ❌</button>
                     <button onClick={toggleEdit} className={'edit'}>edit ✏️</button>
                 </div>
             }
@@ -148,7 +148,7 @@ const Post = (props) => {
                 <span onClick={toggleComments}>comments {comments ? '▲' : '▼'}</span>
             </div>
             {error && <h3 className='error'>Oops. This post may have been deleted.</h3>}
-            {comments && <Comments setError={setError} userId={userId} postId={post.post_id} postUserId={post.user_id}/>}
+            {comments && <Comments setUserId={setUserId} setError={setError} userId={userId} postId={post.post_id} postUserId={post.user_id}/>}
         </StyledPost>
     )
 }

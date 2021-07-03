@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
-import Comments from './Comments'
+// import Comments from './Comments'
 
 
 const StyledCommentForm = styled.div`
@@ -44,7 +44,7 @@ const CommentForm = (props) => {
         e.preventDefault()
         const comment = {
             ...formValues,
-            user_id: 1
+            user_id: parseInt(localStorage.getItem('user_id'))
         }
         axiosWithAuth()
         .post(`posts/${props.postId}/comments`, comment)
