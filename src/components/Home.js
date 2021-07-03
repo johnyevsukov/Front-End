@@ -41,6 +41,10 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
         border-radius: 10px;
         font-size: 25px;
         background-color: #fafdff;
+
+        &:active {
+            background-color: #ededed;
+        }
     }
 }
 
@@ -116,6 +120,9 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
 
     .signup {
         background-color: lightgreen;
+        &:active {
+            background-color: #6eff5e;
+        }
     }
 }
 `
