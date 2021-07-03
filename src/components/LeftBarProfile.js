@@ -122,7 +122,7 @@ const LeftBarProfile = (props) => {
                     <p>My birthday is {user.user_birthday || '..?'}</p>
                     <p>contact me at: {user.user_email}</p>
                     {
-                        parseInt(localStorage.getItem('user_id')) === id &&
+                        localStorage.getItem('user_id') === id &&
                         <div className='buttons'>
                             <button className='edit' onClick={toggleEdit}>edit profile</button>
                             {
