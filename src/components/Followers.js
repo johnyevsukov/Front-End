@@ -132,7 +132,7 @@ const Followers = (props) => {
                 })
             }
             {
-                (id !== parseInt(localStorage.getItem('user_id')) && id !== undefined) &&
+                (id !== localStorage.getItem('user_id') && id !== undefined) &&
                 <div className='connectButton'>
                     {
                         (followers.filter(f => f.user_id === parseInt(localStorage.getItem('user_id'))).length > 0) ?
