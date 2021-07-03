@@ -41,15 +41,6 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
         border-radius: 10px;
         font-size: 25px;
         background-color: #fafdff;
-
-        &:hover {
-            background-color: #006aff;
-            color: white;
-            transform: scale(1.1);
-            transition: all .2s ease-in-out;
-        }
-
-        transition: all .2s ease-in-out;
     }
 }
 
@@ -79,6 +70,20 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
     }
 }
 
+@media (min-width: 1224px) {
+    #buttons {    
+        button {    
+            &:hover {
+                background-color: #006aff;
+                color: white;
+                transform: scale(1.1);
+                transition: all .2s ease-in-out;
+            }
+            transition: all .2s ease-in-out;
+        }
+    }
+}
+
 @media (max-width: 680px) {
     flex-direction: column;
     justify-content: center;
@@ -86,13 +91,13 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
     .info {
         width: 90%;
         h1 {
-            font-size: 50px;
+            font-size: 30px;
             margin: 0;
             padding: 0;
         }
     
         h3 {
-            font-size: 20px;
+            display: none;
         }
     }
 
@@ -102,6 +107,15 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
         button {
             height: 8vh;
             font-size: 20px;
+    }
+
+    .login {
+        width: 80%;
+        margin-top: 10%;
+    }
+
+    .signup {
+        background-color: lightgreen;
     }
 }
 `
@@ -125,8 +139,8 @@ const Home = () => {
                 <h3>Login or sign up to connect with all your best buds!</h3>
             </div>
             <div id='buttons'>
-                <button onClick={login}>Login 🕊️</button>
-                <button onClick={signup}>Signup 🐾</button>
+                <button className='login' onClick={login}>Login 🕊️</button>
+                <button className='signup' onClick={signup}>Signup 🐾</button>
             </div>
         </StyledHome>
     )
