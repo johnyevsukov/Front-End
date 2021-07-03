@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
+import { useParams } from 'react-router-dom'
 
 
 const StyledEditProfile = styled.div`
@@ -23,6 +24,7 @@ label {
 const EditProfile = (props) => {
     const { user } = props
     const [formValues, setFormValues] = useState(user)
+    const { id } = useParams()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -35,25 +37,31 @@ const EditProfile = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         axiosWithAuth()
-        .put('')
+        .put(`users/${id}`, formValues)
         .then(res => {
-
+            res.data.user_birthday ?
+            props.setUser({
+                ...res.data,
+                user_birthday: res.data.user_birthday.slice(0, 10)
+            }) :
+            props.setUser(res.data)
+            props.toggleEdit()
         })
         .catch(err => {
-            console.log(err)
+            console.log(err.response)
         })
     }
 
     return (
         <StyledEditProfile>
             <h3>About me:</h3>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>
                     Species:
                     <input
                     type='text'
                     placeholder='My species..'
-                    value={user.user_species}
+                    value={formValues.user_species}
                     name='user_species'
                     onChange={handleChange}
                     />
@@ -63,7 +71,7 @@ const EditProfile = (props) => {
                     <input
                     type='text'
                     placeholder='My location..'
-                    value={user.user_location}
+                    value={formValues.user_location}
                     name='user_location'
                     onChange={handleChange}
                     />
@@ -73,7 +81,7 @@ const EditProfile = (props) => {
                     <input
                     type='text'
                     placeholder='My birthday..'
-                    value={user.user_birthday}
+                    value={formValues.user_birthday}
                     name='user_birthday'
                     onChange={handleChange}
                     />
