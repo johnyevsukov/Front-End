@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { useState } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router'
+import axiosWithAuth from '../Utils/axiosWithAuth'
 
 
 const StyledNavBar = styled.div`
@@ -31,6 +32,15 @@ form {
         border-radius: 8px;
         height: 75%;
     }
+}
+
+.results {
+    position: absolute;
+    margin-top: 8%;
+    border: 2px solid black;
+    width: 27%;
+    z-index: 999;
+
 }
 
 .buttons {
@@ -71,16 +81,52 @@ h3 {
 }
 `
 
-// const initialFormValue = ``
+const initialFormValues = {
+    username: ''
+}
 
 const NavBar = () => {
-    // const [formValue, setFormValue] = useState(initialFormValue)
+    const [formValues, setFormValues] = useState(initialFormValues)
+    const [searchResults, setSearchResults] = useState([])
     const { push } = useHistory()
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormValues({
+            ...formValues,
+            [name]: value
+        })
+        console.log(e.target.value)
+        axiosWithAuth()
+        .post('users/search', {username: e.target.value})
+        .then(res => {
+            console.log(res)
+            setSearchResults(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    // const handleSubmit = () => {
+    //     axiosWithAuth()
+    //     .post('')
+    //     .then(res => {
+    //         console.log(res)
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+    // }
 
     const logout = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('user_id')
         push('/')
+    }
+
+    const goTo = (id) => {
+        push(`profile/${id}`)
     }
 
     const goToProfile = () => {
@@ -94,11 +140,23 @@ const NavBar = () => {
     return (
         <StyledNavBar>
             <h3 onClick={goToFeed}>Petpost 🐹</h3>
-            <form>
+            <form autocomplete="off">
                 <input
                 type='text'
+                list='results'
+                name='username'
                 placeholder='Search for a bud..'
+                onChange={handleChange}
+                value={formValues.username}
                 />
+                <datalist id='results'>
+                    {
+                        // no onClick for option tag :(
+                        searchResults.map(user => {
+                            return <option onClick={() => goTo(user.user_id)} value={user.username}></option>
+                        })
+                    }
+                </datalist>
                 <button>search</button>
             </form>
             <div className='buttons'>
