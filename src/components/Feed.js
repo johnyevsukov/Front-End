@@ -30,6 +30,11 @@ overflow: scroll;
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  @media (max-width: 680px) {
+    width: 100%;
+    height: 80vh;
+    overflow: scroll;
 `
 
 const Feed = (props) => {
@@ -54,7 +59,7 @@ const Feed = (props) => {
     return (
         <StyledFeed>
             {
-                (id === parseInt(localStorage.getItem('user_id')) || id === undefined) &&
+                (id === localStorage.getItem('user_id') || id === undefined) &&
                 <CreatePost setLoading={setLoading} posts={posts} setPosts={setPosts}/>
             }
             {loading && <div className='loader'></div>}

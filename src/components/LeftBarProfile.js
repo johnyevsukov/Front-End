@@ -24,7 +24,6 @@ img {
 }
 
 .header {
-    border: 1px solid black;
     width: 100%;
     margin-bottom: 5%;
 }
@@ -61,6 +60,20 @@ img {
         background-color: yellow;
     }
 }
+
+@media (max-width: 680px) {
+    width: 100%;
+    height: 20vh;
+    overflow: scroll;
+
+    h2 {
+        margin-top: .5%;
+        margin-bottom: .5%;
+    }
+
+    h3 {
+        margin-top: 0;
+    }
 `
 
 const LeftBarProfile = (props) => {

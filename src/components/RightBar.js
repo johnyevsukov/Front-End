@@ -18,6 +18,20 @@ background-color: #6ba6ed;
     width: 100%;
     margin-bottom: 5%;
 }
+
+@media (max-width: 680px) {
+    width: 100%;
+    height: 20vh;
+    overflow: scroll;
+
+    h2 {
+        margin-top: .5%;
+        margin-bottom: .5%;
+    }
+
+    h3 {
+        margin-top: 0;
+    }
 `
 
 const RightBar = (props) => {

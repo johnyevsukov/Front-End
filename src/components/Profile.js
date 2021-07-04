@@ -10,6 +10,9 @@ import LeftBarProfile from './LeftBarProfile'
 
 const StyledContent = styled.div`
 display: flex;
+
+@media (max-width: 680px) {
+    flex-direction: column;
 `
 
 const Profile = () => {
@@ -19,7 +22,7 @@ const Profile = () => {
         <div>
             <NavBar />
             <StyledContent>
-                <LeftBarProfile />
+                <LeftBarProfile className='leftBar'/>
                 <Feed feedEndpoint={`users/${id}/posts`}/>
                 <RightBar profileId={id}/>
             </StyledContent>
