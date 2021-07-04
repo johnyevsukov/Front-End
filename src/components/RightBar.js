@@ -8,15 +8,15 @@ const StyledRightBar = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-border: 2px solid gray;
 height: 95vh;
 width: 20%;
 background-color: #6ba6ed;
 
 .header {
-    border: 1px solid black;
     width: 100%;
     margin-bottom: 5%;
+    h2 {
+    }
 }
 
 @media (max-width: 680px) {

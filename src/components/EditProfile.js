@@ -19,6 +19,27 @@ label {
     margin: auto;
     text-align: left;
 }
+
+.buttons {
+    button {
+        margin-top: 5%;
+        margin-bottom: 2%;
+    }
+
+    .submit {
+        &:hover {
+            background-color: lightgreen;
+            border: 1px solid green;
+        }
+    }
+
+    .cancel {
+        &:hover {
+            background-color: pink;
+            border: 1px solid red;
+        }
+    }
+}
 `
 
 const EditProfile = (props) => {

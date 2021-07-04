@@ -19,6 +19,10 @@ label {
     margin-top: 2%;
     margin-bottom: 2%;
 }
+
+input {
+    margin-top: 1%;
+}
 `
 
 const initialFormValues = {

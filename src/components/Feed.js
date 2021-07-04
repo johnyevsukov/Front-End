@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom'
 
 
 const StyledFeed = styled.div`
-border: 2px solid gray;
 height: 95vh;
 width: 80%;
 display: flex;

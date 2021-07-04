@@ -14,7 +14,6 @@ border-bottom: 2px solid #1f7ced;
 
 form {
     width: 50%;
-    border: 2px solid gray;
     height: 60%;
     align-items: center;
     display: flex;
@@ -38,7 +37,6 @@ form {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    border: 2px solid gray;
     width: 20%;
     height: 60%;
 

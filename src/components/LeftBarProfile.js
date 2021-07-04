@@ -11,7 +11,6 @@ const StyledLeftBar = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-border: 2px solid gray;
 height: 95vh;
 width: 20%;
 background-color: #6ba6ed;
@@ -34,12 +33,24 @@ img {
     justify-content: center;
     margin: auto;
     width: 50%;
+    
+    button {
+        border-radius: 8px;
+        border: 1px solid white;
+    }
 }
 
 .deleteButtons {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    button {
+        margin-bottom: 4%;
+        &:hover {
+            background-color: lightgray;
+        }
+    }
 }
 
 .delete {
@@ -52,12 +63,24 @@ img {
             border: 1px solid gray;
             background-color: red;
             color: white;
+            font-weight: bold;
+            box-shadow: 20px 5px 40px red,
+            0px 5px 40px red,
+           -20px 5px 40px red;
         }
 }
 
 .edit {
     &:hover {
-        background-color: yellow;
+        background-color: #fff78c;
+    }
+}
+
+.info {
+    text-align: center;
+    p {
+        margin: 0;
+        margin-bottom: 5%;
     }
 }
 
@@ -130,10 +153,12 @@ const LeftBarProfile = (props) => {
                 {   !edit ?
                     <div>
                     <h3>About me:</h3>
-                    <p>Hi! I'm a {user.user_species || '..?'}</p>
-                    <p>I'm located in {user.user_location || '..?'}</p>
-                    <p>My birthday is {user.user_birthday || '..?'}</p>
-                    <p>contact me at: {user.user_email}</p>
+                    <div className='info'>
+                        <p>Hi! I'm a {user.user_species || '..?'}</p>
+                        <p>I'm located in {user.user_location || '..?'}</p>
+                        <p>My birthday is {user.user_birthday || '..?'}</p>
+                        <p>contact me at: {user.user_email}</p>
+                    </div>
                     {
                         localStorage.getItem('user_id') === id &&
                         <div className='buttons'>

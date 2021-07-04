@@ -7,7 +7,8 @@ import { useParams } from 'react-router-dom'
 
 
 const StyledFollowers = styled.div`
-border: 2px solid gray;
+border: 2px solid white;
+border-radius: 5px;
 width: 90%;
 height: 20%;
 margin-bottom: 10%;
@@ -51,7 +52,6 @@ margin-bottom: 10%;
     justify-content: space-evenly;
     height: 80%;
     overflow: scroll;
-    border: 1px solid black
 }
 
 .loader {
@@ -74,9 +74,9 @@ margin-bottom: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     height: 20%;
     margin: auto;
+    background: linear-gradient(90deg, #6ba6ed, #ffffff);
 }
 `
 
