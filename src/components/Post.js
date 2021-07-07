@@ -15,6 +15,10 @@ margin-bottom: 2%;
 width: 70%;
 border-radius: 8px;
 
+.liked {
+    color: blue;
+}
+
 h3 {
     transition: transform .2s;
     &:hover {
@@ -61,6 +65,8 @@ h3 {
 }
 
 .more {
+    margin-top: 3%;
+    margin-bottom: 3%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -77,23 +83,32 @@ h3 {
 const Post = (props) => {
     const [post, setPost] = useState(props.post)
     const [userId, setUserId] = useState(parseInt(localStorage.getItem('user_id')))
-    const [username, setUsername] = useState()
     const [comments, setComments] = useState(false)
+    const [likes, setLikes] = useState([])
+    const [liked, setLiked] = useState(false)
     const [edit, setEdit] = useState(false)
     const [error, setError] = useState(false)
     const { push } = useHistory()
 
     useEffect(() => {
         axiosWithAuth()
-        .get(`users/${post.user_id}`)
+        .get(`posts/${post.post_id}/likes`)
         .then(res => {
-            console.log(res.data)
-            setUsername(res.data.username)
+            setLikes(res.data)
+            const likeCheck = res.data.filter(like => {
+                return like.user_id === parseInt(localStorage.getItem('user_id'))
+            })
+            if (likeCheck.length > 0) {
+                setLiked(true)
+            }
+            else {
+                setLiked(false)
+            }
         })
         .catch(err => {
             console.log(err)
         })
-    }, [post.user_id])
+    }, [post.post_id])
 
     const handleDelete = () => {
         axiosWithAuth()
@@ -107,6 +122,32 @@ const Post = (props) => {
         .catch(err => {
             console.log(err)
         })
+    }
+
+    const toggleLike = () => {
+        if (!liked) {
+            axiosWithAuth()
+            .post(`posts/${post.post_id}/likes`, {user_id: localStorage.getItem('user_id')})
+            .then(res => {
+                console.log(res.data)
+                setLikes(res.data)
+                setLiked(true)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+        else {
+            axiosWithAuth()
+            .delete(`posts/${localStorage.getItem('user_id')}/unlike/${post.post_id}`)
+            .then(res => {
+                setLikes(res.data)
+                setLiked(false)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
     }
 
     const toggleComments = () => {
@@ -126,7 +167,7 @@ const Post = (props) => {
             {
                 !edit ?
                 <div>
-                    <h3 onClick={goToUser}>{username}:</h3>
+                    <h3 onClick={goToUser}>{post.username}:</h3>
                     <p>{post.post_text}</p>
                     <p className='time'>{timeago.format(post.created_at)}</p>
                     {/* {
@@ -134,17 +175,17 @@ const Post = (props) => {
                         <p className='time'>{timeago.format(post.updated_at)}</p>
                     } */}
                 </div>
-                : <EditPost toggleEdit={toggleEdit} username={username} post={post.post_text} id={post.post_id} setPost={setPost}/>
+                : <EditPost toggleEdit={toggleEdit} username={post.username} post={post.post_text} id={post.post_id} setPost={setPost}/>
             }
             {
                 (post.user_id === userId && !edit) &&
                 <div className='buttons'>
-                    <button onClick={handleDelete} className={'delete'}>delete ❌</button>
-                    <button onClick={toggleEdit} className={'edit'}>edit ✏️</button>
+                    <button onClick={handleDelete} className='delete'>delete ❌</button>
+                    <button onClick={toggleEdit} className='edit'>edit ✏️</button>
                 </div>
             }
             <div className='more'>
-                <p>likes: 0</p>
+                <span onClick={toggleLike} className={liked ? 'liked' : null}>paws: {likes.length}</span>
                 <span onClick={toggleComments}>comments {comments ? '▲' : '▼'}</span>
             </div>
             {error && <h3 className='error'>Oops. This post may have been deleted.</h3>}

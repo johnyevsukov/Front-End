@@ -140,7 +140,7 @@ const NavBar = () => {
     return (
         <StyledNavBar>
             <h3 onClick={goToFeed}>Petpost 🐹</h3>
-            <form autocomplete="off">
+            <form autoComplete="off">
                 <input
                 type='text'
                 list='results'
