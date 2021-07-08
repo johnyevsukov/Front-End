@@ -13,7 +13,7 @@ height: 49%;
 width: 49%;
 
 &:hover {
-    color: white;
+    background-color: rgba(255, 255, 255, 0.3);
     border: 1px solid white;
     border-radius: 5px;
     cursor: pointer;

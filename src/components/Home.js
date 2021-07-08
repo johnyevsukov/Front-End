@@ -61,7 +61,7 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
     }
 }
 
-@media (max-width: 1224px) {
+@media (max-width: 1300px) {
     #buttons {
         button {
             height: 8vh;

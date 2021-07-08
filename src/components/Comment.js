@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import EditComment from './EditComment'
+import * as timeago from 'timeago.js'
 
 
 const StyledComment = styled.div`
@@ -89,8 +90,11 @@ const Comment = (props) => {
         <StyledComment>
             <p className='name'>{comment.username} says..</p>
             {
-                !edit ? 
-                <p>{comment.comment_text}</p>
+                !edit ?
+                <div>
+                    <p>{comment.comment_text}</p>
+                    <p className='time'>{timeago.format(comment.created_at)}</p>
+                </div> 
                 : <EditComment 
                     id={comment.comment_id}
                     comment={comment.comment_text}
