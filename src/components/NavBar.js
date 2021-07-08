@@ -197,6 +197,7 @@ const NavBar = () => {
     //         console.log(err)
     //     })
     // }
+    
 
     const logout = () => {
         localStorage.removeItem('token')
