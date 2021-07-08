@@ -88,6 +88,29 @@ img {
     width: 100%;
     height: 20vh;
     overflow: scroll;
+    flex-direction: row;
+
+    .top {
+        margin-left: 5%;
+    }
+
+    .about {
+        margin-top: -12%;
+        width: 70%;
+        height: 50%;
+        font-size: small;
+        h3 {
+            margin-bottom: 0;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    .buttons {
+        width: 50%;
+    }
 
     h2 {
         margin-top: .5%;
@@ -147,11 +170,12 @@ const LeftBarProfile = (props) => {
 
     return (
         <StyledLeftBar>
-            <div className='header'>
-                <h2>{user.username}</h2>
-                <img src={default_user} alt='a'/>
+                <div className='top'>
+                    <h2>{user.username}</h2>
+                    <img src={default_user} alt='a'/>
+                </div>
                 {   !edit ?
-                    <div>
+                    <div className='about'>
                     <h3>About me:</h3>
                     <div className='info'>
                         <p>Hi! I'm a {user.user_species || '..?'}</p>
@@ -179,7 +203,6 @@ const LeftBarProfile = (props) => {
                     </div> :
                     <EditProfile user={user} setUser={setUser} toggleEdit={toggleEdit}/>
                 }
-            </div>
         </StyledLeftBar>
     )
 }
