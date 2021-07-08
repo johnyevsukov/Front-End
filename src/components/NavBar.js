@@ -84,19 +84,19 @@ h3 {
     justify-content: center;
     h3 {
         font-size: medium;
-        border: 1px solid black;
         width: 17%;
     }
     .buttons {
         width: 45%;
-        border: 1px solid black;
         button {
-            width: 32%;
+            width: 30%;
         }
     }
     form {
-        border: 1px solid black;
         width: 30%;
+        input {
+            width: 40%;
+        }
         button {
             width: 45%;
         }

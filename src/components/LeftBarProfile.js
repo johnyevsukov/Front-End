@@ -170,39 +170,39 @@ const LeftBarProfile = (props) => {
 
     return (
         <StyledLeftBar>
-                <div className='top'>
-                    <h2>{user.username}</h2>
-                    <img src={default_user} alt='a'/>
+            <div className='top'>
+                <h2>{user.username}</h2>
+                <img src={default_user} alt='a'/>
+            </div>
+            {   !edit ?
+                <div className='about'>
+                <h3>About me:</h3>
+                <div className='info'>
+                    <p>Hi! I'm a {user.user_species || '..?'}</p>
+                    <p>I'm located in {user.user_location || '..?'}</p>
+                    <p>My birthday is {user.user_birthday || '..?'}</p>
+                    <p>contact me at: {user.user_email}</p>
                 </div>
-                {   !edit ?
-                    <div className='about'>
-                    <h3>About me:</h3>
-                    <div className='info'>
-                        <p>Hi! I'm a {user.user_species || '..?'}</p>
-                        <p>I'm located in {user.user_location || '..?'}</p>
-                        <p>My birthday is {user.user_birthday || '..?'}</p>
-                        <p>contact me at: {user.user_email}</p>
+                {
+                    localStorage.getItem('user_id') === id &&
+                    <div className='buttons'>
+                        <button className='edit' onClick={toggleEdit}>edit profile</button>
+                        {
+                            deleteUser ?
+                            <div>
+                                <h2>Are you sure?</h2>
+                                <div className='deleteButtons'>
+                                    <button onClick={handleDelete}>Yes</button>
+                                    <button onClick={toggleDelete}>no</button>
+                                </div>
+                            </div> :
+                            <button className='delete'onClick={toggleDelete}>DELETE ACCOUNT</button>
+                        }
                     </div>
-                    {
-                        localStorage.getItem('user_id') === id &&
-                        <div className='buttons'>
-                            <button className='edit' onClick={toggleEdit}>edit profile</button>
-                            {
-                                deleteUser ?
-                                <div>
-                                    <h2>Are you sure?</h2>
-                                    <div className='deleteButtons'>
-                                        <button onClick={handleDelete}>Yes</button>
-                                        <button onClick={toggleDelete}>no</button>
-                                    </div>
-                                </div> :
-                                <button className='delete'onClick={toggleDelete}>DELETE ACCOUNT</button>
-                            }
-                        </div>
-                    }
-                    </div> :
-                    <EditProfile user={user} setUser={setUser} toggleEdit={toggleEdit}/>
                 }
+                </div> :
+                <EditProfile user={user} setUser={setUser} toggleEdit={toggleEdit}/>
+            }
         </StyledLeftBar>
     )
 }
