@@ -11,6 +11,7 @@ align-items: center;
 height: 95vh;
 width: 20%;
 background-color: #6ba6ed;
+overflow: scroll;
 
 .header {
     width: 100%;

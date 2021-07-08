@@ -44,6 +44,10 @@ margin-bottom: 10%;
       margin: auto;
       background: linear-gradient(90deg, #6ba6ed, #ffffff);
   }
+
+  @media (max-width: 1300px) {
+    height: 30%;
+}
 `
 
 const Following = (props) => {
