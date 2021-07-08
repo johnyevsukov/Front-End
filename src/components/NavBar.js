@@ -2,7 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
-import axiosWithAuth from '../Utils/axiosWithAuth'
+// import axiosWithAuth from '../Utils/axiosWithAuth'
+import ExitToApp from '@material-ui/icons/ExitToApp'
+import MenuBook from '@material-ui/icons/MenuBook'
+import Pets from '@material-ui/icons/Pets'
+import Search from '@material-ui/icons/Search'
 
 
 const StyledNavBar = styled.div`
@@ -13,63 +17,73 @@ height: 63px;
 background-color: #408eed;
 border-bottom: 2px solid #1f7ced;
 
-form {
-    width: 50%;
+.formDiv {
+    width: 40%;
     height: 60%;
-    align-items: center;
     display: flex;
     justify-content: center;
-
-    input {
-        width: 40%;
-        outline: none;
-        border-radius: 8px;
-        border: none;
-        height: 60%;
+    align-items: center;
+    form {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    
+        input {
+            width: 40%;
+            outline: none;
+            border-radius: 8px;
+            border: none;
+            height: 60%;
+        }
+    
+        button {
+            background-color: white;
+            border-radius: 8px;
+            height: 75%;
+        }
     }
-
-    button {
-        border-radius: 8px;
-        height: 75%;
-    }
-}
-
-.results {
-    position: absolute;
-    margin-top: 8%;
-    border: 2px solid black;
-    width: 27%;
-    z-index: 999;
-
 }
 
 .buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
     width: 20%;
     height: 60%;
-
-    button {
-        height: 80%;
-        border-radius: 8px;
-        transition: transform .2s;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    span {
+        border: 1px solid gray;
+        padding-top: .5%;
+        padding-bottom: .5%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border-radius: 17px;
+        width: 80px;
+        height: 74%;
+        transition: .1s ease-in-out;
         &:hover {
-            transform: scale(1.2);
-            background-color: white;
-            border: 1px solid gray;
+            background-color: #f2f2f2;
+            cursor: pointer;
+            box-shadow: 0px 3px 8px #000;
         }
     }
-
     .logout {
         &:hover {
             background-color: pink;
-            border: 1px solid red;
+            cursor: pointer;
+            box-shadow: 0px 3px 8px #000;
         }
     }
 }
 
 h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 20%;
     height: 60%;
     font-size: xx-large;
@@ -80,25 +94,80 @@ h3 {
     }
 }
 
+.outer .profile {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+
+.outer:hover .profile {
+    visibility: visible;
+  }
+
+.outer .feed {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+
+.outer:hover .feed {
+    visibility: visible;
+}
+
+.outer .logoutText {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+
+.outer:hover .logoutText {
+    visibility: visible;
+}
+
 @media (max-width: 680px) {
-    justify-content: center;
+    justify-content: space-evenly;
     h3 {
-        font-size: medium;
-        width: 17%;
+        font-size: small;
+        width: 20%;
     }
     .buttons {
-        width: 45%;
-        button {
+        width: 30%;
+        span {
             width: 30%;
         }
     }
-    form {
-        width: 30%;
-        input {
-            width: 40%;
-        }
-        button {
-            width: 45%;
+    .formDiv {
+        form {
+            input {
+                width: 100%;
+            }
+            button {
+                width: 30%;
+            }
         }
     }
 }
@@ -110,7 +179,6 @@ const initialFormValues = {
 
 const NavBar = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
-    const [searchResults, setSearchResults] = useState([])
     const { push } = useHistory()
 
     const handleChange = (e) => {
@@ -118,16 +186,6 @@ const NavBar = () => {
         setFormValues({
             ...formValues,
             [name]: value
-        })
-        console.log(e.target.value)
-        axiosWithAuth()
-        .post('users/search', {username: e.target.value})
-        .then(res => {
-            console.log(res)
-            setSearchResults(res.data)
-        })
-        .catch(err => {
-            console.log(err)
         })
     }
 
@@ -148,10 +206,6 @@ const NavBar = () => {
         push('/')
     }
 
-    const goTo = (id) => {
-        push(`profile/${id}`)
-    }
-
     const goToProfile = () => {
         push(`/profile/${localStorage.getItem('user_id')}`)
     }
@@ -163,29 +217,40 @@ const NavBar = () => {
     return (
         <StyledNavBar>
             <h3 onClick={goToFeed}>Petpost 🐹</h3>
-            <form autoComplete="off">
-                <input
-                type='text'
-                list='results'
-                name='username'
-                placeholder='Search for a bud..'
-                onChange={handleChange}
-                value={formValues.username}
-                />
-                <datalist id='results'>
-                    {
-                        // no onClick for option tag :(
-                        searchResults.map(user => {
-                            return <option onClick={() => goTo(user.user_id)} value={user.username}></option>
-                        })
-                    }
-                </datalist>
-                <button>search</button>
-            </form>
+            <div className='formDiv'>
+                <form autoComplete="off">
+                    <input
+                    type='text'
+                    list='results'
+                    name='username'
+                    placeholder='Search for a bud..'
+                    onChange={handleChange}
+                    value={formValues.username}
+                    />
+                    <button>
+                        <Search />
+                    </button>
+                </form>
+            </div>
             <div className='buttons'>
-                <button onClick={goToProfile}>Profile</button>
-                <button onClick={goToFeed}>Feed</button>
-                <button className='logout' onClick={logout}>Logout</button>
+                <span className='outer' onClick={goToProfile}>
+                    <Pets />
+                    <div className='profile'>
+                        Profile
+                    </div>
+                </span>
+                <span className='outer' onClick={goToFeed}>
+                    <MenuBook />
+                    <div className='feed'>
+                        Feed
+                    </div>
+                </span>
+                <span className='logout outer' onClick={logout}>
+                    <ExitToApp />
+                    <div className='logoutText'>
+                        Logout
+                    </div>
+                </span>
             </div>
         </StyledNavBar>
     )
