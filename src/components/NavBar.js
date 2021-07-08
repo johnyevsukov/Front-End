@@ -29,7 +29,6 @@ border-bottom: 2px solid #1f7ced;
         align-items: center;
         display: flex;
         justify-content: center;
-    
         input {
             width: 40%;
             outline: none;
@@ -37,7 +36,6 @@ border-bottom: 2px solid #1f7ced;
             border: none;
             height: 60%;
         }
-    
         button {
             background-color: white;
             border-radius: 8px;
