@@ -12,11 +12,19 @@ height: calc(100vh - 63px);
 width: 20%;
 background-color: #6ba6ed;
 overflow: scroll;
+border-left: 2px solid #6ba6ed;
 
 .header {
     width: 100%;
     margin-bottom: 5%;
     h2 {
+        font-size: large;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        margin: 0;
+        background-color: white;
     }
 }
 
