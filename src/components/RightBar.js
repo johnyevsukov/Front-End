@@ -8,7 +8,7 @@ const StyledRightBar = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-height: 95vh;
+height: calc(100vh - 63px);
 width: 20%;
 background-color: #6ba6ed;
 overflow: scroll;

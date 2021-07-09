@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { useState, useEffect } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import UserCard from './UserCard'
 
@@ -51,22 +50,22 @@ margin-bottom: 10%;
 `
 
 const Following = (props) => {
+    const { profileId } = props
     const [following, setFollowing] = useState([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setLoading(true)
         axiosWithAuth()
-        .get(`users/${props.profileId}/following`)
+        .get(`users/${profileId}/following`)
         .then(res => {
-            console.log(res.data)
             setLoading(false)
             setFollowing(res.data)
         })
         .catch(err => {
             console.log(err)
         })
-    }, [props.profileId])
+    }, [profileId])
 
     return (
         <StyledFollowing>

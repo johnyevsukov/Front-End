@@ -31,7 +31,13 @@ const initialFormValues = {
 }
 
 const CommentForm = (props) => {
-    const { setError, setLoading } = props
+    const {
+        setError,
+        setLoading,
+        setComments,
+        comments,
+        postId
+    } = props
     const [formValues, setFormValues] = useState(initialFormValues)
     const userId = parseInt(localStorage.getItem('user_id'))
 
@@ -51,12 +57,12 @@ const CommentForm = (props) => {
         }
         setLoading(true)
         axiosWithAuth()
-        .post(`posts/${props.postId}/comments`, comment)
+        .post(`posts/${postId}/comments`, comment)
         .then(res => {
             setLoading(false)
             setFormValues(initialFormValues)
-            props.setComments([
-                ...props.comments,
+            setComments([
+                ...comments,
                 res.data
             ])
         })

@@ -1,14 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
-import Post from './Post'
-import { useEffect, useState } from 'react'
-import axiosWithAuth from '../Utils/axiosWithAuth'
-import CreatePost from './CreatePost'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import axiosWithAuth from '../Utils/axiosWithAuth'
+import Post from './Post'
+import CreatePost from './CreatePost'
 
 
 const StyledFeed = styled.div`
-height: 95vh;
+height: calc(100vh - 63px);
 width: 80%;
 display: flex;
 flex-direction: column;
@@ -37,34 +36,44 @@ overflow: scroll;
 `
 
 const Feed = (props) => {
+    const { feedEndpoint } = props
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
     const { id } = useParams()
+    const userId = localStorage.getItem('user_id')
 
     useEffect(() => {
         setLoading(true)
         axiosWithAuth()
-        .get(`${props.feedEndpoint}`)
+        .get(`${feedEndpoint}`)
         .then(res => {
-            console.log(res.data)
             setLoading(false)
             setPosts(res.data)
         })
         .catch(err => {
             console.log(err)
         })
-    }, [props.feedEndpoint])
+    }, [feedEndpoint])
 
     return (
         <StyledFeed>
             {
-                (id === localStorage.getItem('user_id') || id === undefined) &&
-                <CreatePost setLoading={setLoading} posts={posts} setPosts={setPosts}/>
+                (id === userId || id === undefined) &&
+                <CreatePost
+                setLoading={setLoading}
+                posts={posts}
+                setPosts={setPosts}
+                />
             }
             {loading && <div className='loader'></div>}
             {
                 posts.map(post => {
-                    return <Post key={post.post_id} post={post} setPosts={setPosts} posts={posts}/>
+                    return <Post 
+                            key={post.post_id}
+                            post={post}
+                            setPosts={setPosts}
+                            posts={posts}
+                            />
                 })
             }
         </StyledFeed>

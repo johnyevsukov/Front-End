@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { useState, useEffect } from 'react'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import UserCard from './UserCard'
-import { useParams } from 'react-router-dom'
 
 
 const StyledFollowers = styled.div`
+display: flex;
+flex-direction: column;
 border: 2px solid white;
 border-radius: 5px;
 width: 90%;
@@ -14,10 +15,11 @@ height: 20%;
 margin-bottom: 10%;
 
 .connectButton {
+    padding-top: 2%;
+    padding-bottom: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid gray;
     width: 100%;
     background-color: #3080ff;
 
@@ -71,6 +73,7 @@ margin-bottom: 10%;
   }
 
   h3 {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,27 +88,28 @@ margin-bottom: 10%;
 `
 
 const Followers = (props) => {
+    const { profileId } = props
     const [followers, setFollowers] = useState([])
     const [loading, setLoading] = useState(false)
     const { id } = useParams()
+    const userId = localStorage.getItem('user_id')
 
     useEffect(() => {
         setLoading(true)
         axiosWithAuth()
-        .get(`users/${props.profileId}/followers`)
+        .get(`users/${profileId}/followers`)
         .then(res => {
-            console.log(res.data)
             setLoading(false)
             setFollowers(res.data)
         })
         .catch(err => {
             console.log(err)
         })
-    }, [props.profileId])
+    }, [profileId])
 
     const handleUnfollow = () => {
         axiosWithAuth()
-        .delete(`users/${localStorage.getItem('user_id')}/unfollow/${id}`)
+        .delete(`users/${userId}/unfollow/${id}`)
         .then(res => {
             setFollowers(res.data)
         })
@@ -116,7 +120,7 @@ const Followers = (props) => {
 
     const handleFollow = () => {
         axiosWithAuth()
-        .post(`users/${parseInt(localStorage.getItem('user_id'))}/follow`, {following_id: id})
+        .post(`users/${parseInt(userId)}/follow`, {following_id: id})
         .then(res => {
             setFollowers(res.data)
         })
@@ -135,17 +139,26 @@ const Followers = (props) => {
                     return <UserCard key={user.user_id} user={user} />
                 })
             }
+            </div>
             {
-                (id !== localStorage.getItem('user_id') && id !== undefined) &&
+                (id !== userId && id !== undefined) &&
                 <div className='connectButton'>
                     {
-                        (followers.filter(f => f.user_id === parseInt(localStorage.getItem('user_id'))).length > 0) ?
-                        <button className='unfollow' onClick={handleUnfollow}>unfollow</button> :
-                        <button className='follow' onClick={handleFollow}>follow</button>
+                        (followers.filter(f => 
+                            f.user_id === parseInt(userId)).length > 0) ?
+                        <button
+                        className='unfollow'
+                        onClick={handleUnfollow}>
+                            unfollow
+                        </button> :
+                        <button
+                        className='follow'
+                        onClick={handleFollow}>
+                            follow
+                        </button>
                     }
                 </div>
             }
-            </div>
         </StyledFollowers>
     )
 }

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
-import axiosWithAuth from '../Utils/axiosWithAuth'
-import default_user from '../assets/default_user.png'
-import EditProfile from './EditProfile'
 import { useHistory } from 'react-router'
+import styled from 'styled-components'
+import axiosWithAuth from '../Utils/axiosWithAuth'
+import EditProfile from './EditProfile'
+import default_user from '../assets/default_user.png'
 
 
 const StyledLeftBar = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-height: 95vh;
+height: calc(100vh - 63px);
 width: 20%;
 background-color: #6ba6ed;
 
@@ -33,7 +33,6 @@ img {
     justify-content: center;
     margin: auto;
     width: 50%;
-    
     button {
         border-radius: 8px;
         border: 1px solid white;
@@ -44,7 +43,6 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     button {
         margin-bottom: 4%;
         &:hover {
@@ -172,7 +170,7 @@ const LeftBarProfile = (props) => {
         <StyledLeftBar>
             <div className='top'>
                 <h2>{user.username}</h2>
-                <img src={default_user} alt='a'/>
+                <img src={default_user} alt='user'/>
             </div>
             {   !edit ?
                 <div className='about'>

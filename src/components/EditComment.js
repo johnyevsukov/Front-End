@@ -18,7 +18,6 @@ form {
     justify-content: space-evenly;
     flex-direction:column;
     align-items: center;
-
     button {
         background-color: white;
         border-radius: 5px;

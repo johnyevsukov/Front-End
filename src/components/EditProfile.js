@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
-import { useParams } from 'react-router-dom'
 
 
 const StyledEditProfile = styled.div`
@@ -43,7 +43,7 @@ label {
 `
 
 const EditProfile = (props) => {
-    const { user } = props
+    const { user, setUser, toggleEdit } = props
     const [formValues, setFormValues] = useState(user)
     const { id } = useParams()
 
@@ -61,12 +61,12 @@ const EditProfile = (props) => {
         .put(`users/${id}`, formValues)
         .then(res => {
             res.data.user_birthday ?
-            props.setUser({
+            setUser({
                 ...res.data,
                 user_birthday: res.data.user_birthday.slice(0, 10)
             }) :
-            props.setUser(res.data)
-            props.toggleEdit()
+            setUser(res.data)
+            toggleEdit()
         })
         .catch(err => {
             console.log(err.response)
@@ -108,8 +108,17 @@ const EditProfile = (props) => {
                     />
                 </label>
                 <div className='buttons'>
-                    <button type='submit' className='submit'>submit</button>
-                    <button type='button' className='cancel' onClick={props.toggleEdit}>cancel</button>
+                    <button
+                    type='submit'
+                    className='submit'>
+                        submit
+                    </button>
+                    <button
+                    type='button'
+                    className='cancel'
+                    onClick={toggleEdit}>
+                        cancel
+                    </button>
                 </div>
             </form>
             <p>contact me at: {user.user_email}</p>

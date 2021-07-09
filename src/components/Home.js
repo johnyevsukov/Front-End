@@ -2,25 +2,28 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
+
 const StyledHome = styled.div`
 margin: 0;
 padding: 0;
 height: 100vh;
 background-color: lightblue;
 display: flex;
-background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
+background: 
+linear-gradient(
+    -45deg, #CFE3FF,
+    #5099FF, #006aff, 
+    #2E85FF);
 
 .info {
     width: 65%;
     justify-content: center;
     display: flex;
     flex-direction: column;
-
     h1 {
         font-size: 80px;
         margin: 0;
     }
-
     h3 {
         font-size: 30px;
     }
@@ -32,7 +35,6 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
     width: 35%;
     justify-content: center;
     align-items: center;
-
     button {
         margin-top: 2%;
         margin-bottom: 2%;
@@ -54,7 +56,6 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
             font-size: 60px;
             margin: 0;
         }
-    
         h3 {
             font-size: 20px;
         }
@@ -72,7 +73,6 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
             font-size: 60px;
             margin: 0;
         }
-    
         h3 {
             font-size: 20px;
         }
@@ -104,7 +104,6 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
             margin: 0;
             padding: 0;
         }
-    
         h3 {
             display: none;
         }
@@ -112,17 +111,14 @@ background: linear-gradient(-45deg, #CFE3FF, #5099FF, #006aff, #2E85FF);
 
     #buttons {
         width: 100%;
-
         button {
             height: 8vh;
             font-size: 20px;
     }
-
     .login {
         width: 80%;
         margin-top: 10%;
     }
-
     .signup {
         background-color: lightgreen;
         &:active {

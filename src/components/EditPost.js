@@ -18,7 +18,6 @@ form {
     justify-content: space-evenly;
     flex-direction:column;
     align-items: center;
-
     button {
         border-radius: 5px;
         outline: none;
@@ -70,21 +69,21 @@ const EditPost = (props) => {
             <h3>{username}:</h3>
             <form onSubmit={handleSubmit}>
                 <input
-                type='text'
-                name='post'
-                value={formValue}
-                onChange={handleChange}
+                    type='text'
+                    name='post'
+                    value={formValue}
+                    onChange={handleChange}
                 />
                 <div className='buttons'>
                     <button
-                    type='submit'
-                    className='submit'>
+                        type='submit'
+                        className='submit'>
                         submit
                     </button>
                     <button 
-                    type='button'
-                    className='cancel'
-                    onClick={props.toggleEdit}>
+                        type='button'
+                        className='cancel'
+                        onClick={toggleEdit}>
                         cancel
                     </button>
                 </div>

@@ -1,11 +1,10 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import axiosWithAuth from '../Utils/axiosWithAuth'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 import styled from 'styled-components'
+import axiosWithAuth from '../Utils/axiosWithAuth'
 import Comments from './Comments'
 import EditPost from './EditPost'
 import * as timeago from 'timeago.js'
-import { useHistory } from 'react-router'
 
 
 const StyledPost = styled.div`
