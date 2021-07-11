@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
-// import axiosWithAuth from '../Utils/axiosWithAuth'
+import axiosWithAuth from '../Utils/axiosWithAuth'
 import ExitToApp from '@material-ui/icons/ExitToApp'
 import MenuBook from '@material-ui/icons/MenuBook'
 import Pets from '@material-ui/icons/Pets'
@@ -41,6 +41,36 @@ border-bottom: 2px solid #1f7ced;
             border-radius: 8px;
             height: 75%;
         }
+    }
+}
+
+.formDiv .results {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    border: 2px solid #408eed;
+    background-color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 63px;
+}
+
+.result {
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    &:hover {
+        background-color: #6ba6ed;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
     }
 }
 
@@ -177,6 +207,7 @@ const initialFormValues = {
 
 const NavBar = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
+    const [searchResults, setSearchResults] = useState([])
     const { push } = useHistory()
 
     const handleChange = (e) => {
@@ -184,6 +215,19 @@ const NavBar = () => {
         setFormValues({
             ...formValues,
             [name]: value
+        })
+        axiosWithAuth()
+        .post('users/search', {username: value})
+        .then(res => {
+            if (value.length < 1) {
+                setSearchResults([])
+            }
+            else {
+                setSearchResults(res.data)
+            }
+        })
+        .catch(err => {
+            console.log(err)
         })
     }
 
@@ -197,7 +241,6 @@ const NavBar = () => {
     //         console.log(err)
     //     })
     // }
-    
 
     const logout = () => {
         localStorage.removeItem('token')
@@ -211,6 +254,12 @@ const NavBar = () => {
 
     const goToFeed = () => {
         push('/timeline')
+    }
+
+    const goToUser = (id) => {
+        push(`/profile/${id}`)
+        setFormValues(initialFormValues)
+        setSearchResults([])
     }
 
     return (
@@ -230,6 +279,12 @@ const NavBar = () => {
                         <Search />
                     </button>
                 </form>
+                {searchResults.length > 0 &&
+                <div className='results'>
+                {searchResults.map(result => {
+                    return <div onClick={() => goToUser(result.user_id)} className='result'>{result.username}</div>
+                })}
+                </div>}
             </div>
             <div className='buttons'>
                 <span className='outer' onClick={goToProfile}>
