@@ -62,8 +62,7 @@ border-bottom: 2px solid #1f7ced;
 
 .result {
     width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin: 0;
     padding-top: 2%;
     padding-bottom: 2%;
     &:hover {
