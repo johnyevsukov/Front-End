@@ -55,8 +55,17 @@ const Feed = (props) => {
         })
     }, [feedEndpoint])
 
+    const handlePagination = (e) =>
+    {
+        const { target } = e;
+        if (target.scrollHeight - target.scrollTop === target.clientHeight)
+        {
+            console.log('scrolled');
+        }
+    };
+
     return (
-        <StyledFeed>
+        <StyledFeed onScroll={handlePagination}>
             {
                 (id === userId || id === undefined) &&
                 <CreatePost
