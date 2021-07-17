@@ -23,6 +23,10 @@ img {
     width: 25px;
     height: 25px;
 }
+p {
+    padding: none;
+    margin: 0;
+}
 `
 
 const UserCard = (props) => {
