@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
 import { useHistory } from 'react-router'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import ExitToApp from '@material-ui/icons/ExitToApp'
@@ -209,12 +208,24 @@ const NavBar = () => {
     const [searchResults, setSearchResults] = useState([])
     const { push } = useHistory()
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormValues({
-            ...formValues,
-            [name]: value
-        })
+    // debounce
+    const debounce = (fn, delay, e) => {
+        let timeoutId
+        return function(e) {
+            const { name, value } = e.target
+            setFormValues({
+                ...formValues,
+                [name]: value
+            })
+            if(timeoutId) {
+                clearTimeout(timeoutId)
+            }
+            timeoutId = setTimeout(()=>fn(value), delay)
+            console.log(timeoutId)
+        }
+    }
+
+    const handleChange = (value) => {
         axiosWithAuth()
         .post('users/search', {username: value})
         .then(res => {
@@ -230,16 +241,19 @@ const NavBar = () => {
         })
     }
 
-    // const handleSubmit = () => {
-    //     axiosWithAuth()
-    //     .post('')
-    //     .then(res => {
-    //         console.log(res)
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-    // }
+    const search = useCallback(debounce(handleChange, 300), [])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axiosWithAuth()
+        .post('')
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 
     const logout = () => {
         localStorage.removeItem('token')
@@ -265,13 +279,13 @@ const NavBar = () => {
         <StyledNavBar>
             <h3 onClick={goToFeed}>Petpost 🐹</h3>
             <div className='formDiv'>
-                <form autoComplete="off">
+                <form autoComplete="off" onSubmit={handleSubmit}>
                     <input
                     type='text'
                     list='results'
                     name='username'
                     placeholder='Search for a bud..'
-                    onChange={handleChange}
+                    onChange={search}
                     value={formValues.username}
                     />
                     <button>
