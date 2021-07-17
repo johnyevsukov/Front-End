@@ -241,7 +241,7 @@ const NavBar = () => {
         })
     }
 
-    const search = useCallback(debounce(handleChange, 300), [])
+    const search = useCallback(debounce(handleChange, 300), []) // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleSubmit = (e) => {
         e.preventDefault()
