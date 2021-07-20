@@ -75,8 +75,19 @@ const EditProfile = (props) => {
 
     return (
         <StyledEditProfile>
-            <h3>About me:</h3>
+            {/* <h3>About me:</h3> */}
             <form onSubmit={handleSubmit}>
+                <label>
+                    Avatar:
+                    <select onChange={handleChange} value={formValues.avatar} name='avatar'>
+                        <option value=''>- Select an Avatar -</option>
+                        <option value='dog'>Dog</option>
+                        <option value='cat'>Cat</option>
+                        <option value='rodent'>Rodent</option>
+                        <option value='hamster'>Hamster</option>
+                        <option value='lizard'>Lizard</option>
+                    </select>
+                </label>
                 <label>
                     Species:
                     <input
@@ -101,7 +112,7 @@ const EditProfile = (props) => {
                     Birthday:
                     <input
                     type='text'
-                    placeholder='My birthday..'
+                    placeholder='YYYY-MM-DD'
                     value={formValues.user_birthday}
                     name='user_birthday'
                     onChange={handleChange}
