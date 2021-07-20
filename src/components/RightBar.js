@@ -29,9 +29,15 @@ border-left: 2px solid #6ba6ed;
 }
 
 @media (max-width: 680px) {
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height: 20vh;
     overflow: scroll;
+
+    .header {
+        display: none;
+    }
 
     h2 {
         margin-top: .5%;

@@ -85,6 +85,11 @@ margin-bottom: 10%;
 @media (max-width: 1300px) {
     height: 30%;
 }
+
+@media (max-width: 680px) {
+    margin-top: 10%;
+    height: 89%;
+}
 `
 
 const Followers = (props) => {

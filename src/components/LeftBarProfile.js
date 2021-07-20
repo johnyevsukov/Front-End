@@ -107,7 +107,17 @@ img {
     }
 
     .buttons {
-        width: 50%;
+        width: 80%;
+        height: 52%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 2px;
+        button {
+            width: 37%;
+            height 97%;
+        }
     }
 
     h2 {

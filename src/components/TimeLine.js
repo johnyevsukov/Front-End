@@ -7,6 +7,10 @@ import styled from 'styled-components'
 
 const StyledContent = styled.div`
 display: flex;
+
+@media (max-width: 680px) {
+    flex-direction: column;
+}
 `
 
 const TimeLine = () => {
