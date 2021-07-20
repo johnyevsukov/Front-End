@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import cat from '../assets/cat.png'
 import { useHistory } from 'react-router-dom'
+import { importAll, avatarSelector } from '../Utils/avatarSelector'
 
 
 const StyledUserCard = styled.div`
@@ -31,6 +32,7 @@ p {
 
 const UserCard = (props) => {
     const { user } = props
+    const images = importAll(require.context('../assets', false, /\.(png|jpe?g|svg)$/))
     const { push } = useHistory()
 
     const handleClick = () => {
@@ -39,7 +41,7 @@ const UserCard = (props) => {
 
     return (
         <StyledUserCard onClick={handleClick}>
-            <img src={cat} alt={cat}></img>
+            <img src={images[avatarSelector(user.user_avatar)].default} alt={cat}></img>
             <p>{user.username}</p>
         </StyledUserCard>
     )

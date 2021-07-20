@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import EditProfile from './EditProfile'
-import cat from '../assets/cat.png'
+import { importAll, avatarSelector } from '../Utils/avatarSelector'
 
 
 const StyledLeftBar = styled.div`
@@ -121,6 +121,7 @@ img {
 `
 
 const LeftBarProfile = (props) => {
+    const images = importAll(require.context('../assets', false, /\.(png|jpe?g|svg)$/))
     const { id } = useParams()
     const [user, setUser] = useState({})
     // const [loading, setLoading] = useState(false)
@@ -170,7 +171,7 @@ const LeftBarProfile = (props) => {
         <StyledLeftBar>
             <div className='top'>
                 <h2>{user.username}</h2>
-                <img src={cat} alt='cat'/>
+                <img src={images[avatarSelector(user.user_avatar)].default} alt='cat'/>
             </div>
             {   !edit ?
                 <div className='about'>

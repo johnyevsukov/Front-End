@@ -79,7 +79,7 @@ const EditProfile = (props) => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Avatar:
-                    <select onChange={handleChange} value={formValues.avatar} name='avatar'>
+                    <select onChange={handleChange} value={formValues.user_avatar} name='user_avatar'>
                         <option value=''>- Select an Avatar -</option>
                         <option value='dog'>Dog</option>
                         <option value='cat'>Cat</option>
