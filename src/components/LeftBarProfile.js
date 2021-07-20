@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import EditProfile from './EditProfile'
-import default_user from '../assets/default_user.png'
+import cat from '../assets/cat.png'
 
 
 const StyledLeftBar = styled.div`
@@ -170,7 +170,7 @@ const LeftBarProfile = (props) => {
         <StyledLeftBar>
             <div className='top'>
                 <h2>{user.username}</h2>
-                <img src={default_user} alt='user'/>
+                <img src={cat} alt='cat'/>
             </div>
             {   !edit ?
                 <div className='about'>

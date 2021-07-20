@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import default_user from '../assets/default_user.png'
+import cat from '../assets/cat.png'
 import { useHistory } from 'react-router-dom'
 
 
@@ -39,7 +39,7 @@ const UserCard = (props) => {
 
     return (
         <StyledUserCard onClick={handleClick}>
-            <img src={default_user} alt={default_user}></img>
+            <img src={cat} alt={cat}></img>
             <p>{user.username}</p>
         </StyledUserCard>
     )
