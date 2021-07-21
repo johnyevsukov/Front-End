@@ -11,7 +11,6 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-border: 2px solid gray;
 background: linear-gradient(-45deg, #48d9ca, #006aff, #23a6d5, #23d5ab);
 background-size: 400% 400%;
 animation: gradient 15s ease infinite;
@@ -33,18 +32,18 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid gray;
     width: 100%;
     height: 100vh;
 
     label {
         display: flex;
         flex-direction: column;
+        align-items: center;
         margin-top: 2%;
         margin-bottom: 2%;
         text-align: left;
         width: 40%;
-        height: 5vh;
+        height: 65px;
         font-size: large;
         font-weight: bold;
     }
@@ -54,6 +53,7 @@ form {
         font-size: medium;
         border-radius: 8px;
         outline: none;
+        width: 30vw;
     }
 
     button {
@@ -79,6 +79,34 @@ form {
 
     h3 {
         color: red;
+    }
+}
+
+@media (max-width: 1300px) {
+    form {
+        label {
+            height: 55px;
+        }
+        button {
+            height: 7vh;
+        }
+    }
+}
+
+@media (max-width: 680px) {
+    h1 {
+        margin-top: 0;
+        padding-top: 0;
+    }
+    form {
+        input {
+            width: 50vw;
+        }
+        button {
+            height: 8vh;
+            margin-top: 10%;
+            width: 50%
+        }
     }
 }
 `

@@ -10,7 +10,6 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-border: 2px solid gray;
 background: linear-gradient(-45deg, #48d9ca, #006aff, #23a6d5, #23d5ab);
 background-size: 400% 400%;
 animation: gradient 15s ease infinite;
@@ -32,7 +31,6 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid gray;
     width: 100%;
     height: 100vh;
 
