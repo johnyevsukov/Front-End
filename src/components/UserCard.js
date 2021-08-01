@@ -41,7 +41,7 @@ const UserCard = (props) => {
 
     return (
         <StyledUserCard onClick={handleClick}>
-            <img src={images[avatarSelector(user.user_avatar)].default} alt={cat}></img>
+            <img src={images[avatarSelector(user.user_avatar)].default} alt={cat}/>
             <p>{user.username}</p>
         </StyledUserCard>
     )

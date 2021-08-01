@@ -5,7 +5,6 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import ExitToApp from '@material-ui/icons/ExitToApp'
 import MenuBook from '@material-ui/icons/MenuBook'
 import Pets from '@material-ui/icons/Pets'
-import Search from '@material-ui/icons/Search'
 
 
 const StyledNavBar = styled.div`
@@ -246,7 +245,7 @@ const NavBar = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         axiosWithAuth()
-        .post('')
+        .post('users/search', {username: formValues.username})
         .then(res => {
             console.log(res)
         })
@@ -288,9 +287,9 @@ const NavBar = () => {
                     onChange={search}
                     value={formValues.username}
                     />
-                    <button>
+                    {/* <button>
                         <Search />
-                    </button>
+                    </button> */}
                 </form>
                 {searchResults.length > 0 &&
                 <div className='results'>
