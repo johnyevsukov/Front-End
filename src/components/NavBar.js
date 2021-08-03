@@ -5,6 +5,7 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import ExitToApp from '@material-ui/icons/ExitToApp'
 import MenuBook from '@material-ui/icons/MenuBook'
 import Pets from '@material-ui/icons/Pets'
+// import Search from '@material-ui/icons/Search'
 
 
 const StyledNavBar = styled.div`
