@@ -1,8 +1,9 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import { useHistory } from 'react-router'
+import schema from "../validation/signupSchema";
+import * as yup from "yup";
 
 
 const StyledRegister = styled.div`
@@ -14,6 +15,17 @@ align-items: center;
 background: linear-gradient(-45deg, #48d9ca, #006aff, #23a6d5, #23d5ab);
 background-size: 400% 400%;
 animation: gradient 15s ease infinite;
+
+.errors {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 4%;
+}
+
+.error {
+    -webkit-text-stroke: 1px red;
+}
 
 @keyframes gradient {
     0% {
@@ -63,6 +75,7 @@ form {
         font-size: large;
         background-color: #fafdff;
         margin-top: 2%;
+        margin-bottom: 0;
         &:hover {
             background-color: #006aff;
             color: white;
@@ -119,13 +132,40 @@ const initialFormValues = {
     re_password: ''
 }
 
+const initialFormErrors = {
+    user_email: '',
+    username: '',
+    password: '',
+    re_password: ''
+  };
+
+const initialDisabled = true;
+
 const Register = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
-    const [error, setError] = useState()
+    const [formErrors, setFormErrors] = useState(initialFormErrors);
+    const [disabled, setDisabled] = useState(initialDisabled);
+    const [apiError, setApiError] = useState('')
     const { push } = useHistory()
 
     const handleChange = (e) => {
         const { name, value } = e.target
+
+        yup
+        .reach(schema, name)
+        .validate(value)
+        .then(() => {
+            setFormErrors({
+            ...formErrors,
+            [name]: "",
+            });
+        })
+        .catch((err) => {
+            setFormErrors({
+            ...formErrors,
+            [name]: err.errors[0],
+            });
+        });
         setFormValues({
             ...formValues,
             [name]: value
@@ -134,26 +174,28 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(formValues.password === formValues.re_password) {
-            axios.post('https://pet-post.herokuapp.com/api/auth/register', {
-                username: formValues.username,
-                password: formValues.password,
-                user_email: formValues.user_email
-            })
-            .then(res => {
-                console.log(res)
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('user_id', res.data.user_id)
-                push('/timeline')
-            })
-            .catch(err => {
-                setError(err.response.data.message)
-            })
-        }
-        else {
-            setError('Passwords do not match!')
-        }
+        axios.post('https://pet-post.herokuapp.com/api/auth/register', {
+            username: formValues.username,
+            password: formValues.password,
+            user_email: formValues.user_email
+        })
+        .then(res => {
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('user_id', res.data.user_id)
+            push('/timeline')
+        })
+        .catch(err => {
+            console.log(err.response.data.message)
+            setApiError(err.response.data.message)
+        })
     }
+
+    useEffect(() => {
+        schema.isValid(formValues)
+        .then((valid) => {
+            setDisabled(!valid);
+        });
+        }, [formValues]);
 
     return (
         <StyledRegister>
@@ -199,9 +241,15 @@ const Register = () => {
                     onChange={handleChange}
                     />
                 </label>
-                <button>Create Account!</button>
-                {error && <h3>{error}</h3>}
+                <button disabled={disabled}>Create Account!</button>
             </form>
+            <div className='errors'>
+                <div className='error'>{apiError}</div>
+                <div className='error'>{formErrors.user_email}</div>
+                <div className='error'>{formErrors.username}</div>
+                <div className='error'>{formErrors.password}</div>
+                <div className='error'>{formErrors.re_password}</div>
+            </div>
         </StyledRegister>
     )
 }
