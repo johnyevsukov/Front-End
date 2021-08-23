@@ -43,7 +43,7 @@ label {
 
 .buttons {
     display: flex;
-    flex-direction: row;
+    flex-direction: row !important;
     justify-content: center;
 }
 
