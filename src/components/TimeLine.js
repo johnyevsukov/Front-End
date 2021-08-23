@@ -10,8 +10,10 @@ const StyledTimeLine = styled.div`
 display: flex;
 height: calc(100vh - 63px);
 
-@media (max-width: 680px) {
+/* large-tablet */
+@media (max-width: 960px) {
     flex-direction: column;
+    height: calc(100vh - 63px);
 }
 `
 
