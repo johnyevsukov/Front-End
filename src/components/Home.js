@@ -2,132 +2,132 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
-
 const StyledHome = styled.div`
-margin: 0;
-padding: 0;
 height: 100vh;
-background-color: lightblue;
-display: flex;
 background: 
 linear-gradient(
     -45deg, #CFE3FF,
     #5099FF, #006aff, 
     #2E85FF);
 
+.wrapper {
+    height: 100vh;
+    display: flex;
+}
+
 .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 65%;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    h1 {
-        font-size: 80px;
-        margin: 0;
-    }
-    h3 {
-        font-size: 30px;
-    }
 }
 
-#buttons {
+.buttons {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 35%;
-    justify-content: center;
+}
+
+button {
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    border-radius: 10px;
+    border: 2px outset gray;
+    cursor: pointer;
+    padding: .7rem;
+    margin: .5rem;
+    width: 50%;
+    font-size: 1.4rem;
+}
+
+h1 {
+    font-size: 5.5rem;
+    font-weight: bold;
+    padding: 30px;
+}
+
+h3 {
+    font-size: 1.7rem;
+}
+
+/* desktop only */
+@media (min-width: 950px) {
     button {
-        margin-top: 2%;
-        margin-bottom: 2%;
-        width: 40%;
-        height: 5vh;
-        border-radius: 10px;
-        font-size: 25px;
-        background-color: #fafdff;
-
-        &:active {
-            background-color: #ededed;
+        transition: 200ms ease-in-out;
+        &: hover {
+            transform: scale(1.1);
+            background-color: lightgreen;
+            border: none;
+            font-weight: bold;
+            color: white;
+            box-shadow:
+            0 0 5px 2.5px #fff,  /* inner white */
+            0 0 8px 5px lightgreen,
+            0 0 11px 7px lightgreen;
         }
     }
 }
 
-@media (max-width: 1600px) {
+/* small laptops */
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 5rem;
+        width: 7ch;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        width: 20ch;
+        text-align: center;
+        padding-right: 40px;
+    }
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    h1 {
+        font-size: 3.1rem;
+        padding-bottom: 1rem;
+        padding-left: 55px;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+        padding: 0;
+        width: 15ch;
+        font-weight: bold;
+    }
+
     .info {
-        h1 {
-            font-size: 60px;
-            margin: 0;
-        }
-        h3 {
-            font-size: 20px;
-        }
+        width: 95%;
     }
-}
 
-@media (max-width: 1300px) {
-    #buttons {
-        button {
-            height: 8vh;
-        }
-    }
-    .info {
-        h1 {
-            font-size: 60px;
-            margin: 0;
-        }
-        h3 {
-            font-size: 20px;
-        }
-    }
-}
-
-@media (min-width: 1224px) {
-    #buttons {    
-        button {   
-            &:hover {
-                background-color: #006aff;
-                color: white;
-                transform: scale(1.1);
-                transition: all .2s ease-in-out;
-            }
-            transition: all .2s ease-in-out;
-        }
-    }
-}
-
-@media (max-width: 680px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .info {
+    .buttons {
+        margin-top: 1rem;
         width: 90%;
-        h1 {
-            font-size: 30px;
-            margin: 0;
-            padding: 0;
-        }
-        h3 {
-            display: none;
-        }
     }
 
-    #buttons {
-        width: 100%;
-        button {
-            height: 8vh;
-            font-size: 20px;
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
+
     .login {
         width: 80%;
-        margin-top: 10%;
-    }
-    .signup {
         background-color: lightgreen;
-        &:active {
-            background-color: #6eff5e;
-        }
+    }
+
+    .signup {
+        background-color: white;
     }
 }
 `
-
 
 const Home = () => {
     const { push } = useHistory()
@@ -142,13 +142,15 @@ const Home = () => {
 
     return (
         <StyledHome>
-            <div className='info'>
-                <h1>🐹🦎 Pet Post 🐱🐶</h1>
-                <h3>Login or sign up to connect with all your best buds!</h3>
-            </div>
-            <div id='buttons'>
-                <button className='login' onClick={login}>Login 🕊️</button>
-                <button className='signup' onClick={signup}>Signup 🐾</button>
+            <div className='wrapper'>
+                <div className='info'>
+                    <h1>🐹🦎 Pet Post 🐱🐶</h1>
+                    <h3>Login or sign up to connect with all your best buds!</h3>
+                </div>
+                <div className='buttons'>
+                    <button className='login' onClick={login}>Login 🕊️</button>
+                    <button className='signup' onClick={signup}>Signup 🐾</button>
+                </div>
             </div>
         </StyledHome>
     )

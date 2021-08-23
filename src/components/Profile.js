@@ -4,15 +4,18 @@ import NavBar from './NavBar'
 import RightBar from './RightBar'
 import Feed from './Feed'
 import styled from 'styled-components'
-import LeftBarProfile from './LeftBarProfile'
-// import axiosWithAuth from '../Utils/axiosWithAuth'
+import LeftProfileBar from './LeftProfileBar'
 
 
 const StyledContent = styled.div`
 display: flex;
+height: calc(100vh - 63px);
 
-@media (max-width: 680px) {
+/* large-tablet */
+@media (max-width: 960px) {
     flex-direction: column;
+    height: calc(100vh - 63px);
+}
 `
 
 const Profile = () => {
@@ -22,7 +25,7 @@ const Profile = () => {
         <div>
             <NavBar />
             <StyledContent>
-                <LeftBarProfile className='leftBar'/>
+                <LeftProfileBar className='leftBar'/>
                 <Feed feedEndpoint={`users/${id}/posts`}/>
                 <RightBar profileId={id}/>
             </StyledContent>

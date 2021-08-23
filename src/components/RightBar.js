@@ -8,45 +8,50 @@ const StyledRightBar = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-height: calc(100vh - 63px);
-width: 20%;
+height: 100%;
+width: 22%;
 background-color: #6ba6ed;
 overflow: scroll;
-border-left: 2px solid #6ba6ed;
+border-left: 2px solid #1f7ced;
 
-.header {
+.connections-header {
     width: 100%;
     margin-bottom: 5%;
+    font-size: large;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: white;
+    padding: .5rem;
+}
+
+h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+/* large-desktop */
+@media (min-width: 1850px) {
     h2 {
-        font-size: large;
-        padding-top: 1%;
-        padding-bottom: 1%;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-        margin: 0;
-        background-color: white;
+        font-size: 1.7rem;
     }
 }
 
-@media (max-width: 680px) {
-    display: flex;
-    flex-direction: row;
+/* large-tablet */
+@media (max-width: 960px) {
     width: 100%;
-    height: 20vh;
-    overflow: scroll;
+    height: 30%;
+    flex-direction: row;
+    justify-content: space-around;
 
-    .header {
+    .connections-header {
         display: none;
     }
+}
 
-    h2 {
-        margin-top: .5%;
-        margin-bottom: .5%;
-    }
-
-    h3 {
-        margin-top: 0;
-    }
+/* mobile */
+@media (max-width: 710px) {
+    border-left: none;
+}
 `
 
 const RightBar = (props) => {
@@ -54,7 +59,7 @@ const RightBar = (props) => {
 
     return (
         <StyledRightBar>
-            <div className='header'>
+            <div className='connections-header'>
                 <h2>Connections:</h2>
             </div>
             <Following profileId={profileId}/>

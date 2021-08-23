@@ -11,84 +11,99 @@ flex-direction: column;
 border: 2px solid white;
 border-radius: 5px;
 width: 90%;
-height: 20%;
-margin-bottom: 10%;
+max-width: 20rem;
 
-.connectButton {
-    padding-top: 2%;
-    padding-bottom: 2%;
+h3 {
+    text-align: center;
+    font-weight: bold;
+    padding: 1.5rem;
+    background:
+    linear-gradient(
+        90deg, 
+        #6ba6ed,
+        #ffffff)
+}
+
+.follow-unfollow {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    background-color: #3080ff;
+    background: #3080ff;
+    padding: .4rem;
+}
 
-    button {
-        width: 50%;
-        border-radius: 8px;
-        border: 1px solid white;
-        transition: transform .2s;
-        &:hover {
-            transform: scale(1.2);
+.follow-unfollow button {
+    background: white;
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: .4rem;
+    width: 8rem;
+}
+
+.followers {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-height: 13.8rem;
+    overflow: scroll;
+}
+
+/* desktop only */
+@media (min-width: 950px) {
+    .follow {
+        transition: 100ms ease-in-out;
+        &: hover {
+            background-color: lightgreen;
+            border-color: green;
+            font-weight: bold;
         }
     }
 
     .unfollow {
-        &:hover {
-            background-color: pink;
-            border: 1px solid red;
-        }
-    }
-
-    .follow {
-        &:hover {
-            background-color: lightgreen;
-            border: 1px solid green;
+        transition: 100ms ease-in-out;
+        &: hover {
+            background-color: #FFC0CB;
+            border-color: red;
+            font-weight: bold;
         }
     }
 }
 
-.list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    height: 80%;
-    overflow: scroll;
+/* large-desktop */
+@media (min-width: 1850px) {
+    .followers {
+        max-height: 15.9rem;
+    }
 }
 
-.loader {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
-    border-radius: 50%;
-    width: 1vh;
-    height: 1vh;
-    animation: spin 2s linear infinite;
-    margin: auto;
-    margin-top: 2%;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  h3 {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20%;
-    margin: auto;
-    background: linear-gradient(90deg, #6ba6ed, #ffffff);
+/* laptops */
+@media (max-width: 1480px) {
+    .followers {
+        max-height: 11.8rem;
+    }
+    h3 {
+        padding: .5rem;
+    }
 }
 
-@media (max-width: 1300px) {
-    height: 30%;
+/* small-laptops */
+@media (max-width: 1060px) {
+    .followers {
+        max-height: 9.6rem;
+    }
 }
 
-@media (max-width: 680px) {
-    margin-top: 10%;
-    height: 89%;
+/* tablet */
+@media (max-width: 960px) {
+    width: 40%;
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    margin: none;
+    .followers {
+        max-height: 5rem;
+    }
 }
 `
 
@@ -137,7 +152,7 @@ const Followers = (props) => {
     return (
         <StyledFollowers>
             <h3>({followers.length}) Followers:</h3>
-            <div className='list'>
+            <div className='followers'>
             {loading && <div className='loader'></div>}
             {
                 followers.map(user => {
@@ -147,10 +162,10 @@ const Followers = (props) => {
             </div>
             {
                 (id !== userId && id !== undefined) &&
-                <div className='connectButton'>
+                <div className='follow-unfollow'>
                     {
-                        (followers.filter(f => 
-                            f.user_id === parseInt(userId)).length > 0) ?
+                        (followers.filter(fol => 
+                            fol.user_id === parseInt(userId)).length > 0) ?
                         <button
                         className='unfollow'
                         onClick={handleUnfollow}>

@@ -5,52 +5,68 @@ import UserCard from './UserCard'
 
 
 const StyledFollowing = styled.div`
+display: flex;
+flex-direction: column;
 border: 2px solid white;
 border-radius: 5px;
 width: 90%;
-height: 20%;
-margin-bottom: 10%;
+max-width: 20rem;
+margin-bottom: 1rem;
 
-.list {
+h3 {
+    text-align: center;
+    font-weight: bold;
+    padding: 1.5rem;
+    background:
+    linear-gradient(
+        90deg, 
+        #6ba6ed,
+        #ffffff)
+}
+
+.followers {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    height: 80%;
+    max-height: 13.8rem;
     overflow: scroll;
 }
 
-.loader {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
-    border-radius: 50%;
-    width: 1vh;
-    height: 1vh;
-    animation: spin 2s linear infinite;
-    margin: auto;
-    margin-top: 2%;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  h3 {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 20%;
-      margin: auto;
-      background: linear-gradient(90deg, #6ba6ed, #ffffff);
-  }
-
-  @media (max-width: 1300px) {
-    height: 30%;
+/* large-desktop */
+@media (min-width: 1850px) {
+    .followers {
+        max-height: 15.9rem;
+    }
 }
 
-@media (max-width: 680px) {
-    margin-top: 10%;
-    height: 89%;
+/* laptops */
+@media (max-width: 1480px) {
+    .followers {
+        max-height: 11.8rem;
+    }
+    h3 {
+        padding: .5rem;
+    }
+}
+
+/* small-laptops */
+@media (max-width: 1060px) {
+    .followers {
+        max-height: 9.6rem;
+    }
+}
+
+/* tablet */
+@media (max-width: 960px) {
+    width: 40%;
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    margin-bottom: 0;
+    .followers {
+        max-height: 5rem;
+    }
 }
 `
 
@@ -75,7 +91,7 @@ const Following = (props) => {
     return (
         <StyledFollowing>
             <h3>({following.length}) Following:</h3>
-            <div className='list'>
+            <div className='followers'>
             {loading && <div className='loader'></div>}
             {
                 following.map(user => {

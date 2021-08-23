@@ -6,14 +6,45 @@ import * as timeago from 'timeago.js'
 
 
 const StyledComment = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
 background-color: #f2f2f2;
-width: 70%;
+width: 22rem;
 border-radius: 10px;
 margin-top: 2%;
 margin-bottom: 2%;
 
 .name {
     font-weight: bold;
+    padding: .5rem;
+    padding-top: .8rem;
+}
+
+.comment-text {
+    padding: .4rem;
+}
+
+.time {
+    color: #6e6e6e;
+    font-size: .9rem;
+    padding: .2rem;
+    padding-bottom: .8rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    padding: .2rem;
+}
+
+button {
+    margin-bottom: .5rem;
+    width: 5rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
 }
 
 .loader {
@@ -31,34 +62,34 @@ margin-bottom: 2%;
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+}
 
-.buttonDiv {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    margin: auto;
+p {
+    text-align: center;
+}
 
-    button {
-        margin-bottom: 8%;
-        border-radius: 5px;
-        outline: none;
-        border: 1px solid gray;
-        background-color: white;
-    }
-
+/* desktop only */
+@media (min-width: 950px) {
     .delete {
-        &:hover {
-            background-color: pink;
-            border: 1px outset red;
+        transition: 100ms ease-in-out;
+        &: hover {
+            background-color: #FFC0CB;
+            border-color: red;
         }
     }
 
     .edit {
-        &:hover {
-            background-color: #fff78c;
-            border: 1px outset #eddd00;
+        transition: 100ms ease-in-out;
+        &: hover {
+            background-color: #FFFF99;
+            border-color: #FFD700;
         }
     }
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    width: 11rem;
 }
 `
 
@@ -88,24 +119,24 @@ const Comment = (props) => {
 
     return (
         <StyledComment>
-            <p className='name'>{comment.username} says..</p>
+            <h3 className='name'>{comment.username} says..</h3>
             {
-                !edit ?
-                <div>
-                    <p>{comment.comment_text}</p>
-                    <p className='time'>{timeago.format(comment.created_at)}</p>
-                </div> 
-                : <EditComment 
+                edit ?
+                <EditComment 
                     id={comment.comment_id}
                     comment={comment.comment_text}
                     toggleEdit={toggleEdit}
                     setComment={setComment}
                     setLoading={setLoading}
-                    />
+                    /> :
+                <div>
+                    <p className='comment-text'>"{comment.comment_text}"</p>
+                    <p className='time'>{timeago.format(comment.created_at)}</p>
+                </div> 
             }
             {
                 !edit &&
-                <div className='buttonDiv'>
+                <div className='buttons'>
                 {
                     ((postUserId === userId) || (comment.user_id === userId)) && 
                     <button onClick={handleDelete} className='delete' >delete</button>

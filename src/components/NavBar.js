@@ -5,8 +5,6 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import ExitToApp from '@material-ui/icons/ExitToApp'
 import MenuBook from '@material-ui/icons/MenuBook'
 import Pets from '@material-ui/icons/Pets'
-// import Search from '@material-ui/icons/Search'
-
 
 const StyledNavBar = styled.div`
 display: flex;
@@ -16,39 +14,42 @@ height: 63px;
 background-color: #408eed;
 border-bottom: 2px solid #1f7ced;
 
-.formDiv {
+.form-wrapper {
     width: 40%;
     height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
-    form {
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        input {
-            width: 40%;
-            outline: none;
-            border-radius: 8px;
-            border: none;
-            height: 60%;
-        }
-        button {
-            background-color: white;
-            border-radius: 8px;
-            height: 75%;
-        }
+}
+
+form {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    width: 40%;
+    outline: none;
+    border-radius: 8px;
+    border: none;
+    height: 60%;
+    transition: 100ms ease-in-out;
+    &:focus {
+        outline: none;
+        border-color: white;
+        box-shadow: 0 0 10px white;
     }
 }
 
-.formDiv .results {
+.form-wrapper .results {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    width: 20%;
+    width: 18%;
     border: 2px solid #408eed;
     background-color: white;
     text-align: center;
@@ -64,12 +65,7 @@ border-bottom: 2px solid #1f7ced;
     margin: 0;
     padding-top: 2%;
     padding-bottom: 2%;
-    &:hover {
-        background-color: #6ba6ed;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-    }
+    cursor: pointer;
 }
 
 .buttons {
@@ -78,32 +74,22 @@ border-bottom: 2px solid #1f7ced;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    span {
-        border: 1px solid gray;
-        padding-top: .5%;
-        padding-bottom: .5%;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: white;
-        border-radius: 17px;
-        width: 80px;
-        height: 74%;
-        transition: .1s ease-in-out;
-        &:hover {
-            background-color: #f2f2f2;
-            cursor: pointer;
-            box-shadow: 0px 3px 8px #000;
-        }
-    }
-    .logout {
-        &:hover {
-            background-color: pink;
-            cursor: pointer;
-            box-shadow: 0px 3px 8px #000;
-        }
-    }
+}
+
+span {
+    border: 1px solid gray;
+    padding-top: .5%;
+    padding-bottom: .5%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 17px;
+    width: 80px;
+    height: 74%;
+    cursor: pointer;
+    transition: .1s ease-in-out;
 }
 
 h3 {
@@ -112,12 +98,12 @@ h3 {
     align-items: center;
     width: 20%;
     height: 60%;
-    font-size: xx-large;
-    background: linear-gradient(270deg, white, #408eed);
+    font-weight: bold;
+    font-size: 2rem;
+    background: linear-gradient(
+        270deg, white, #408eed);
     border-radius: 20px;
-    &:hover {
-        cursor: pointer;
-    }
+    cursor: pointer;
 }
 
 .outer .profile {
@@ -134,10 +120,6 @@ h3 {
     right: 105%;
 }
 
-.outer:hover .profile {
-    visibility: visible;
-  }
-
 .outer .feed {
     visibility: hidden;
     width: 120px;
@@ -150,10 +132,6 @@ h3 {
     z-index: 1;
     top: -5px;
     right: 105%;
-}
-
-.outer:hover .feed {
-    visibility: visible;
 }
 
 .outer .logoutText {
@@ -170,31 +148,76 @@ h3 {
     right: 105%;
 }
 
-.outer:hover .logoutText {
-    visibility: visible;
+/* desktop only */
+@media (min-width: 950px) {
+    .outer:hover .logoutText {
+        visibility: visible;
+    }
+
+    .outer:hover .feed {
+        visibility: visible;
+    }
+
+    .outer:hover .profile {
+        visibility: visible;
+      }
+    
+    span {
+        &:hover {
+            background-color: #f2f2f2;
+            box-shadow: 0px 3px 8px #000;
+        }
+    }
+    
+    .logout {
+        &:hover {
+            background-color: pink;
+            box-shadow: 0px 3px 8px #000;
+        }
+    }
+
+    .result {
+        &:hover {
+            background-color: #6ba6ed;
+            color: white;
+            font-weight: bold;
+        }
+    }
 }
 
-@media (max-width: 680px) {
-    justify-content: space-evenly;
+/* tablets */
+@media (max-width: 800px) {
     h3 {
-        font-size: small;
-        width: 20%;
+        font-size: 1.5rem;
     }
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    justify-content: space-evenly;
+
+    h3 {
+        text-align: center;
+        font-size: .9rem;
+        width: 20%;
+        line-height: 1.2rem;
+        padding: .4rem;
+    }
+
     .buttons {
         width: 30%;
-        span {
-            width: 30%;
-        }
     }
-    .formDiv {
-        form {
-            input {
-                width: 100%;
-            }
-            button {
-                width: 30%;
-            }
-        }
+
+    .buttons span {
+        width: 30%;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .form-wrapper .results {
+        width: 40%;
     }
 }
 `
@@ -206,9 +229,10 @@ const initialFormValues = {
 const NavBar = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
     const [searchResults, setSearchResults] = useState([])
+    const userId = localStorage.getItem('user_id')
     const { push } = useHistory()
 
-    // debounce
+    // search debounce
     const debounce = (fn, delay, e) => {
         let timeoutId
         return function(e) {
@@ -221,7 +245,6 @@ const NavBar = () => {
                 clearTimeout(timeoutId)
             }
             timeoutId = setTimeout(()=>fn(value), delay)
-            console.log(timeoutId)
         }
     }
 
@@ -241,19 +264,7 @@ const NavBar = () => {
         })
     }
 
-    const search = useCallback(debounce(handleChange, 300), []) // eslint-disable-line react-hooks/exhaustive-deps
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axiosWithAuth()
-        .post('users/search', {username: formValues.username})
-        .then(res => {
-            console.log(res)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
+    const search = useCallback(debounce(handleChange, 300), [])     // eslint-disable-line react-hooks/exhaustive-deps
 
     const logout = () => {
         localStorage.removeItem('token')
@@ -262,7 +273,7 @@ const NavBar = () => {
     }
 
     const goToProfile = () => {
-        push(`/profile/${localStorage.getItem('user_id')}`)
+        push(`/profile/${userId}`)
     }
 
     const goToFeed = () => {
@@ -278,8 +289,8 @@ const NavBar = () => {
     return (
         <StyledNavBar>
             <h3 onClick={goToFeed}>Petpost 🐹</h3>
-            <div className='formDiv'>
-                <form autoComplete="off" onSubmit={handleSubmit}>
+            <div className='form-wrapper'>
+                <form autoComplete="off">
                     <input
                     type='text'
                     list='results'
@@ -288,9 +299,6 @@ const NavBar = () => {
                     onChange={search}
                     value={formValues.username}
                     />
-                    {/* <button>
-                        <Search />
-                    </button> */}
                 </form>
                 {searchResults.length > 0 &&
                 <div className='results'>

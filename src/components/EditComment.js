@@ -5,40 +5,56 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 
 const StyledEditComment = styled.div`
 form {
-    input {
-        height: 2vh;
-        border-radius: 5px;
-        font-size: 95%;
-        border: 1px outset gray;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: .5rem;
 }
 
-.buttons {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction:column;
-    align-items: center;
-    button {
-        background-color: white;
-        border-radius: 5px;
-        border: 1px solid gray;
-        width: 20%;
-        margin-top: 1%;
-        margin-bottom: 1%;
+input {
+    font-size: 1rem;
+    width: 10rem;
+    height: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid gray;
+    margin-top: .5rem;
+    margin-bottom: .7rem;
+}
+
+button {
+    margin-bottom: .5rem;
+    width: 5rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
+}
+
+/* desktop only */
+@media (min-width: 950px) {
+    .cancel {
+        transition: 100ms ease-in-out;
+        &: hover {
+            background-color: pink;
+            border-color: red;
+        }
     }
 
     .submit {
-        &:hover {
+        transition: 100ms ease-in-out;
+        &: hover {
             background-color: lightgreen;
-            border: 1px outset green;
+            border-color: green;
         }
     }
-    
-    .cancel {
-        &:hover {
-            background-color: pink;
-            border: 1px outset red;
-        }
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    input {
+        width: 7rem;
+        height: 1rem;
+        font-size: .9rem;
     }
 }
 `
@@ -62,7 +78,8 @@ const EditComment = (props) => {
         e.preventDefault()
         setLoading(true)
         axiosWithAuth()
-        .put(`comments/${id}`, {comment_text: formValue})
+        .put(`comments/${id}`,
+        {comment_text: formValue})
         .then(res => {
             setLoading(false)
             toggleEdit()

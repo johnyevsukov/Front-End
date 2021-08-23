@@ -4,40 +4,76 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 
 
 const StyledEditPost = styled.div`
-form {
-    input {
-        height: 2vh;
-        border-radius: 5px;
-        font-size: 95%;
-        border: 1px outset gray;
-    }
-}
+display: flex;
+flex-direction: column;
+align-items: center;
 
 .buttons {
     display: flex;
-    justify-content: space-evenly;
-    flex-direction:column;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding: .6rem;
+    margin-top: .4rem;
+}
+
+button {
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    width: 5rem;
+    padding: .25rem;
+    margin-right: 8px;
+    margin-left: 8px;
+    cursor: pointer;
+    background: #ebebeb;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    padding: .6rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    button {
-        border-radius: 5px;
-        outline: none;
-        border: none;
-        width: 20%;
-        margin-top: 3%;
+}
+
+input {
+    font-size: 1rem;
+    width: 17rem;
+    height: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid gray;
+}
+
+/* desktop only */
+@media (min-width: 950px) {
+    .submit {
+        transition: 100ms ease-in-out;
+        &: hover {
+            background-color: lightgreen;
+            border-color: green;
+        }
     }
 
-    .submit {
-        &:hover {
-            background-color: lightgreen;
-            border: 1px outset green;
+    .cancel {
+        transition: 100ms ease-in-out;
+        &: hover {
+            background-color: #FFC0CB;
+            border-color: red;
         }
     }
-    
-    .cancel {
-        &:hover {
-            background-color: pink;
-            border: 1px outset red;
-        }
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    input {
+        width: 10rem;
     }
 }
 `

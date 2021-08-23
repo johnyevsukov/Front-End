@@ -8,33 +8,63 @@ border: 2px outset lightblue;
 margin-top: 2%;
 margin-bottom: 2%;
 width: 70%;
+max-width: 50rem;
 border-radius: 8px;
+
+h3 {
+    margin-top: .5rem;
+    text-align: center;
+    padding: 1.1rem;
+    padding-bottom: 1.2rem;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
 
 form {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-bottom: .2rem;
 
-    input {
-        width: 40%;
-        height: 2vh;
-        border-radius: 4px;
-        border: 1px solid gray;
+input {
+    width: 17rem;
+    height: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid gray;
+}
+
+button {
+    padding: .2rem;
+    width: 8rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 8px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+/* desktop only */
+@media (min-width: 950px) {
+    button {
+        transition: .2s ease-in-out;
+        &:hover {
+            background: lightgreen;
+            transform: scale(1.1);
+            border-radius: 12px;
+            font-weight: bold;
+        }
+    }
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    button {
+        margin: .7rem;
     }
 
-    button {
-        width: 15%;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        transition: .2s transform ease-in-out;
-        border-radius: 8px;
-        border: 1px solid gray;
-        &:hover {
-            transform: scale(1.2);
-            background-color: lightgreen;
-            border-radius: 6px;
-        }
+    input {
+        width: 10rem;
     }
 }
 `
@@ -75,7 +105,7 @@ const CreatePost = (props) => {
 
     return (
         <StyledCreatePost>
-            <h3>What's on your mind, Buddy?</h3>
+            <h3 className='prompt'>What's on your mind, Buddy?</h3>
             <form onSubmit={handleSubmit}>
                 <input
                 type='text'

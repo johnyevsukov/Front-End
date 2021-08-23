@@ -12,114 +12,199 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-background: linear-gradient(-45deg, #48d9ca, #006aff, #23a6d5, #23d5ab);
+background: linear-gradient(-45deg,
+    #CFE3FF, #5099FF,
+    #006aff, #2E85FF);
 background-size: 400% 400%;
 animation: gradient 15s ease infinite;
 
-.errors {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 4%;
+.wrapper {
+    border: 2px outset white;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    width: 40rem;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+}
+
+.input-field {
+    font-size: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
 }
 
 .error {
-    -webkit-text-stroke: 1px red;
+    color: white;
+    font-weight: bold;
+    margin-top: .2rem;
+    margin-bottom: 1rem;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: .5rem;
+    height: .5rem;
+    animation: spin 2s linear infinite;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+  }
 
 form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100vh;
+    width: 29rem;
+    height: 29rem;
+}
 
-    label {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        text-align: left;
-        width: 40%;
-        height: 65px;
-        font-size: large;
+input {
+    width: 17rem;
+    height: 2.2rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    transition: 150ms ease-in-out;
+    &:focus {
+        outline: none;
+        border-color: white;
+        box-shadow: 0 0 20px white;
+    }
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    padding: 1rem;
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    border-radius: 10px;
+    border: 2px outset gray;
+    cursor: pointer;
+    padding: .7rem;
+    width: 60%;
+    font-size: 1.4rem;
+}
+
+/* desktop only */
+@media (min-width: 950px) {
+    button {
+        transition: 200ms ease-in-out;
+        &: hover {
+            background-color: lightgreen;
+            font-weight: bold;
+            border-color: lightgreen;
+            color: white;
+            box-shadow:
+            0 0 5px 2.5px #fff,  /* inner white */
+            0 0 8px 5px lightgreen,
+            0 0 11px 7px lightgreen;
+        }
+    }
+}
+
+/* small laptops */
+@media (max-width: 1270px) {
+    .wrapper {
+        width: 30rem;
+        height: 30rem;
+    }
+
+    .input-field {
+        font-size: 1.4rem;
+    }
+
+    .error {
         font-weight: bold;
+        margin-top: .1rem;
+        margin-bottom: 0;
+    }
+
+    form {
+        width: 25rem;
+        height: 20rem;
+    }
+
+    h1 {
+        margin-bottom: .7rem;
+        font-size: 2.3rem;
     }
 
     input {
-        height: 60%;
-        font-size: medium;
-        border-radius: 8px;
-        outline: none;
-        width: 30vw;
+        width: 14rem;
+        height: 2rem;
+        font-size: 1rem;
     }
 
     button {
-        width: 20%;
-        height: 4vh;
-        border-radius: 10px;
-        font-size: large;
-        background-color: #fafdff;
-        margin-top: 2%;
-        margin-bottom: 0;
-        &:hover {
-            background-color: #006aff;
-            color: white;
-            transform: scale(1.1);
-            transition: all .2s ease-in-out;
-        }
+        margin-top: 1rem;
+        font-size: 
+        width: 50%;
+        padding: .5rem;
+        font-size: 1.2rem;
+    }
+}
 
-        transition: all .2s ease-in-out;
+/* mobile */
+@media (max-width: 710px) {
+    .wrapper {
+        border: none;
+        background: none;
+        height: 100vh;
+        width: auto;
+    }
+
+    .error {
+        width: 20ch;
+        text-align: center;
+        margin-bottom: .6rem;
+    }
+
+    .loader {
+        margin-top: 1.8rem;
     }
 
     h1 {
+        font-size: 1.9rem;
+        text-align: center;
+        font-weight: bold;
         color: white;
+        margin-bottom: 4rem;
     }
 
-    h3 {
-        color: red;
+    button {
+        margin-top: 2.5rem;
     }
-}
 
-@media (max-width: 1300px) {
     form {
-        label {
-            height: 55px;
-        }
-        button {
-            height: 7vh;
-        }
-    }
-}
-
-@media (max-width: 680px) {
-    h1 {
-        margin-top: 0;
-        padding-top: 0;
-    }
-    form {
-        input {
-            width: 50vw;
-        }
-        button {
-            height: 8vh;
-            margin-top: 10%;
-            width: 50%
-        }
+        width: 90%;
     }
 }
 `
@@ -145,6 +230,7 @@ const Register = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
     const [formErrors, setFormErrors] = useState(initialFormErrors);
     const [disabled, setDisabled] = useState(initialDisabled);
+    const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState('')
     const { push } = useHistory()
 
@@ -174,18 +260,20 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
         axios.post('https://pet-post.herokuapp.com/api/auth/register', {
             username: formValues.username,
             password: formValues.password,
             user_email: formValues.user_email
         })
         .then(res => {
+            setLoading(false)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user_id', res.data.user_id)
             push('/timeline')
         })
         .catch(err => {
-            console.log(err.response.data.message)
+            setLoading(false)
             setApiError(err.response.data.message)
         })
     }
@@ -195,60 +283,63 @@ const Register = () => {
         .then((valid) => {
             setDisabled(!valid);
         });
-        }, [formValues]);
+    }, [formValues]);
 
     return (
         <StyledRegister>
-            <form onSubmit={handleSubmit}>
-                <h1>Oh Boy! Glad You're Joining!</h1>
-                <label>
-                    Email:
-                    <input
-                    type='text'
-                    placeholder='Email..'
-                    name='user_email'
-                    value={formValues.user_email}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Username:
-                    <input
-                    type='text'
-                    placeholder='Username..'
-                    name='username'
-                    value={formValues.username}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Password:
-                    <input
-                    type='text'
-                    placeholder='Password..'
-                    name='password'
-                    value={formValues.password}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Re-enter Password:
-                    <input
-                    type='text'
-                    placeholder='Password..'
-                    name='re_password'
-                    value={formValues.re_password}
-                    onChange={handleChange}
-                    />
-                </label>
-                <button disabled={disabled}>Create Account!</button>
-            </form>
-            <div className='errors'>
+            <div className='wrapper'>
+                <h1>Oh Boy! <br/> Glad You're Joining!</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className='input-wrapper'>
+                        <label className='input-field'>
+                            Email:
+                            <input
+                            type='text'
+                            placeholder='Email..'
+                            name='user_email'
+                            value={formValues.user_email}
+                            onChange={handleChange}
+                            />
+                        </label>
+                        <div className='error'>{formErrors.user_email}</div>
+                        <label className='input-field'>
+                            Username:
+                            <input
+                            type='text'
+                            placeholder='Username..'
+                            name='username'
+                            value={formValues.username}
+                            onChange={handleChange}
+                            />
+                        </label>
+                        <div className='error'>{formErrors.username}</div>
+                        <label className='input-field'>
+                            Password:
+                            <input
+                            type='password'
+                            placeholder='Password..'
+                            name='password'
+                            value={formValues.password}
+                            onChange={handleChange}
+                            />
+                        </label>
+                        <div className='error'>{formErrors.password}</div>
+                        <label className='input-field'>
+                            Re-enter Password:
+                            <input
+                            type='password'
+                            placeholder='Password..'
+                            name='re_password'
+                            value={formValues.re_password}
+                            onChange={handleChange}
+                            />
+                        </label>
+                        <div className='error'>{formErrors.re_password}</div>
+                    </div>
+                    <button disabled={disabled}>Create Account!</button>
+                </form>
                 <div className='error'>{apiError}</div>
-                <div className='error'>{formErrors.user_email}</div>
-                <div className='error'>{formErrors.username}</div>
-                <div className='error'>{formErrors.password}</div>
-                <div className='error'>{formErrors.re_password}</div>
+                {loading && <div className='loader'></div>}
             </div>
         </StyledRegister>
     )

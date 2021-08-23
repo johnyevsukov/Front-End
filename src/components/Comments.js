@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import Comment from './Comment'
-import CommentForm from './CommentForm'
+import CreateComment from './CreateComment'
 
 
 const StyledComments = styled.div`
@@ -59,7 +59,7 @@ const Comments = (props) => {
                 })
             }
             {loading && <div className='loader'></div>}
-            <CommentForm
+            <CreateComment
             postId={postId}
             comments={comments}
             setComments={setComments}
