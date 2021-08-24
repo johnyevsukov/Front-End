@@ -16,6 +16,7 @@ with React.js, Node.js, Express.js, and PostgreSQL
     - react router 🕸️
     - private routes 🤫
     - styled components 💅
+    - responsive design 📐
     - yup form validation 📄
     - tokens / user authorization 🔒
 - Mobile layout in the works 🚧 
