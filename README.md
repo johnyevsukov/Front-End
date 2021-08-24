@@ -17,7 +17,7 @@ with React.js, Node.js, Express.js, and PostgreSQL
     - private routes 🤫
     - styled components 💅
     - yup form validation 📄
-    - tokens and user authorization 🔒
+    - tokens / user authorization 🔒
 - Mobile layout in the works 🚧 
 
 ### "Pet tested. Pet approved."
