@@ -5,8 +5,8 @@ Sign up and try it out!
 Back-end source code:  
 [petpost-back-end](https://github.com/johnyevsukov/Back-End)
 ## About:
-- PetPost is a full-stack social media web application built  
-  with React.js, Node.js, Express.js, and PostgreSQL  
+PetPost is a full-stack social media web application built  
+with React.js, Node.js, Express.js, and PostgreSQL  
 
 ## About The Front-End:
 - Built with React.js  ⚛️
