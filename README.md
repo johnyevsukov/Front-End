@@ -26,7 +26,3 @@ with React.js, Node.js, Express.js, and PostgreSQL
 ![Milo Picture](./src/assets/milo.jpeg#milo)
 
 ---
-
-![Chonk Picture](./src/assets/chonk.jpeg#chonk)
-
----
