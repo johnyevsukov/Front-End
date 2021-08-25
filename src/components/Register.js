@@ -270,7 +270,7 @@ const Register = () => {
             setLoading(false)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user_id', res.data.user_id)
-            push('/timeline')
+            push(`/profile/${res.data.user_id}`)
         })
         .catch(err => {
             setLoading(false)

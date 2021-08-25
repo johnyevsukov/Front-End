@@ -295,9 +295,9 @@ const LeftProfileBar = (props) => {
                         <div className='user-info'>
                             <h3 className='header-about'>About me:</h3>
                             <div>
-                                <div className='info-piece'>Hi! I'm a {user.user_species || '..?'}</div>
-                                <div className='info-piece'>I'm located in<br/>{user.user_location || '..?'}</div>
-                                <div className='info-piece'>My birthday is<br/>{user.user_birthday || '..?'}</div>
+                                <div className='info-piece'>Hi! I'm a {user.user_species || '...'}</div>
+                                <div className='info-piece'>I'm located in<br/>{user.user_location || '...'}</div>
+                                <div className='info-piece'>My birthday is<br/>{user.user_birthday || '...'}</div>
                                 <div className='info-piece'>contact me at:<br/>{user.user_email}</div>
                             </div>
                         </div>
