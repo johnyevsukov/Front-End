@@ -8,11 +8,11 @@ export default yup.object().shape({
   username: yup
     .string()
     .required("username is required")
-    .min(3, "username must be at least 3 chars long"),
+    .min(3, "must be at least 3 chars long"),
   password: yup
     .string()
     .required("password is required")
-    .min(3, "password must be at least 3 chars long"),
+    .min(3, "must be at least 3 chars long"),
   re_password: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
