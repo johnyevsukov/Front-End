@@ -33,7 +33,7 @@ background: #fcfcfc; /* slightly off white */
 /* large-tablet */
 @media (max-width: 960px) {
     width: 100%;
-    height: 50%;
+    height: 70%;
 }
 `
 

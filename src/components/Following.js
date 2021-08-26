@@ -89,7 +89,7 @@ const Following = (props) => {
 
     return (
         <StyledFollowing>
-            <h3>({following.length}) Following:</h3>
+            <h3>({following.length}) Following</h3>
             <div className='followers'>
             {loading && <div className='loader'></div>}
             {

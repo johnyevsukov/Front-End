@@ -41,6 +41,9 @@ h2 {
     height: 30%;
     flex-direction: row;
     justify-content: space-around;
+    margin-auto;
+    border-left: none;
+    border-top: 2px solid #1f7ced;
 
     .connections-header {
         display: none;

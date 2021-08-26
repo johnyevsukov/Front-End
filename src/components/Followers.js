@@ -150,7 +150,7 @@ const Followers = (props) => {
 
     return (
         <StyledFollowers>
-            <h3>({followers.length}) Followers:</h3>
+            <h3>({followers.length}) Followers</h3>
             <div className='followers'>
             {loading && <div className='loader'></div>}
             {

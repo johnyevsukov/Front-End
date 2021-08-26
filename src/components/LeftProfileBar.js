@@ -128,7 +128,15 @@ button {
 }
 
 /* desktop only */
-@media (min-width: 950px) {
+@media (min-width: 959px) {
+    .mobile-about-button {
+        display: none;
+    }
+
+    .mobile-about {
+        display: none;
+    }
+
     .delete {
         transition: 200ms ease-in-out;
         &: hover {
@@ -208,15 +216,23 @@ button {
 
 /* large-tablet */
 @media (max-width: 960px) {
+    background: 
+    linear-gradient(to right, 
+        #589ff5, #6dabf8, 
+        #80b7fa, #93c2fd, 
+        #a6ceff);
+    justify-content: center;
+    border-right: none;
+    border-bottom: 2px solid #1f7ced;
     width: 100%;
     height: 20%;
-}
 
-/* mobile */
-@media (max-width: 710px) {
-    border-right: none;
+    .about {
+        display: none;
+    }
+
     .avatar-wrapper {
-        padding: .1rem;;
+        padding: .7rem;
     }
 
     .wrapper {
@@ -227,6 +243,52 @@ button {
         flex-direction: row;
         padding: 1rem;
     }
+
+    .mobile-username-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mobile-about-button {
+        width: 6rem;
+        height: 1.5rem;
+        border: none;
+        border-radius: 5px;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .mobile-about {
+        border: 3px solid #1f7ced;
+        border-radius: 5px;
+        padding: 2rem;
+        font-size: 1.5rem;
+        color: white;
+        line-height: 1.5;
+        font-weight: bold;
+        background: #408eed;
+        position: fixed;
+        top: calc(63px + 17vh);
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* mobile */
+@media (max-width: 710px) {
+    img {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    .mobile-about {
+        font-size: 1rem;
+        padding: 1rem;
+    }
 }
 `
 
@@ -235,6 +297,7 @@ const LeftProfileBar = (props) => {
     const { id } = useParams()
     const [user, setUser] = useState({})
     // const [loading, setLoading] = useState(false)
+    const [mobileAboutToggle, setMobileAboutToggle] = useState(false)
     const [edit, setEdit] = useState(false)
     const [deleteUser, setDeleteUser] = useState(false)
     const userId = localStorage.getItem('user_id')
@@ -278,14 +341,27 @@ const LeftProfileBar = (props) => {
         setDeleteUser(!deleteUser)
     }
 
+    const toggleAbout = () => {
+        setMobileAboutToggle(!mobileAboutToggle)
+    }
+
     return (
         <StyledLeftProfileBar>
             <div className='wrapper'>
                 <div className='username-avatar'>
-                    <h2 className='username'>{user.username}</h2>
+                    <div className='mobile-username-button'>
+                        <h2 className='username'>{user.username}</h2>
+                        <button onClick={toggleAbout} className='mobile-about-button'>About {mobileAboutToggle ? '▼' : '▲'}</button>
+                    </div>
                     <div className='avatar-wrapper'>
                         <img src={images[avatarSelector(user.user_avatar)].default} alt='avatar'/>
                     </div>
+                </div>
+                <div className={`mobile-about ${mobileAboutToggle && 'hide'}`}>
+                    <div>{`${user.user_species}  🐾` || '-'}</div>
+                    <div>{`${user.user_location}  📍` || '-'}</div>
+                    <div>{`${user.user_birthday}  🎂` || '-'}</div>
+                    <div>{`${user.user_email}  ✉️`}</div>
                 </div>
                 {   
                     edit ?
