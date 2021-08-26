@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import github from '../assets/github.png';
 
 const StyledHome = styled.div`
 height: 100vh;
@@ -55,6 +56,17 @@ h3 {
     font-size: 1.7rem;
 }
 
+img {
+    position: absolute;
+    bottom: 17px;
+    right: 17px;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
 /* desktop only */
 @media (min-width: 950px) {
     button {
@@ -71,6 +83,18 @@ h3 {
             0 0 11px 7px lightgreen;
         }
     }
+
+    img {
+        &:hover {
+            transform: rotate(360deg);
+            background: lightgreen;
+            color: white;
+            box-shadow:
+            0 0 15px 7px #fff,  /* inner white */
+            0 0 25px 15px lightgreen,
+            0 0 35px 22px lightgreen;
+        }
+    }
 }
 
 /* small laptops */
@@ -85,6 +109,13 @@ h3 {
         width: 20ch;
         text-align: center;
         padding-right: 40px;
+    }
+
+    img {
+        bottom: 12px;
+        right: 12px;
+        height: 4rem;
+        width: 4rem;
     }
 }
 
@@ -126,6 +157,11 @@ h3 {
     .signup {
         background-color: white;
     }
+
+    img {
+        height: 3rem;
+        width: 3rem;
+    }
 }
 `
 
@@ -151,6 +187,9 @@ const Home = () => {
                     <button className='login' onClick={login}>Login 🕊️</button>
                     <button className='signup' onClick={signup}>Signup 🐾</button>
                 </div>
+                <a href='https://github.com/johnyevsukov/Front-End' target="_blank" rel="noopener noreferrer">
+                    <img src={github} alt='github'/>
+                </a>
             </div>
         </StyledHome>
     )
