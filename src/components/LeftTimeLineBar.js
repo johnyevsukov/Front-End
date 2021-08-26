@@ -14,8 +14,9 @@ border-right: 2px solid #1f7ced;
 
 /* large-tablet */
 @media (max-width: 960px) {
-    width: 100%;
-    height: 20%;
+    // width: 100%;
+    // height: 20%;
+    display: none;
 }
 `
 
