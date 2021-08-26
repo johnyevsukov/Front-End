@@ -5,7 +5,6 @@ import { useHistory } from 'react-router'
 import schema from "../validation/signupSchema";
 import * as yup from "yup";
 
-
 const StyledRegister = styled.div`
 height: 100vh;
 display: flex;
@@ -201,6 +200,8 @@ button {
 
     button {
         margin-top: 2.5rem;
+        border: none;
+        background: white;
     }
 
     form {

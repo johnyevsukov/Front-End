@@ -4,7 +4,6 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import EditComment from './EditComment'
 import * as timeago from 'timeago.js'
 
-
 const StyledComment = styled.div`
 display: flex;
 flex-direction: column;

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 
-
 const StyledEditComment = styled.div`
 form {
     display: flex;

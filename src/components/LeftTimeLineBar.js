@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-
 const StyledLeftTimeLineBar = styled.div`
 height: height: 100%;
 width: 22%;

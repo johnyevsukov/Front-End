@@ -162,6 +162,10 @@ img {
         height: 3rem;
         width: 3rem;
     }
+
+    button {
+        border: none;
+    }
 }
 `
 

@@ -5,7 +5,6 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import schema from "../validation/editProfileSchema";
 import * as yup from "yup";
 
-
 const StyledEditProfile = styled.div`
 form {
     display: flex;

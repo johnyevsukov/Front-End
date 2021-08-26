@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 
-
 const StyledCreatePost = styled.div`
 border: 2px outset lightblue;
 margin-top: 2%;

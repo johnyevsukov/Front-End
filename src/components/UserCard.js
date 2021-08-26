@@ -4,7 +4,6 @@ import cat from '../assets/cat.png'
 import { useHistory } from 'react-router-dom'
 import { importAll, avatarSelector } from '../Utils/avatarSelector'
 
-
 const StyledUserCard = styled.div`
 display: flex;
 flex-direction: column;

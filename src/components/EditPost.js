@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 
-
 const StyledEditPost = styled.div`
 display: flex;
 flex-direction: column;

@@ -5,7 +5,6 @@ import StyledLeftTimeLineBar from './LeftTimeLineBar'
 import Feed from './Feed'
 import styled from 'styled-components'
 
-
 const StyledTimeLine = styled.div`
 display: flex;
 height: calc(100vh - 63px);

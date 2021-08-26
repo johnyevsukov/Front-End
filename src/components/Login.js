@@ -177,6 +177,11 @@ button {
     form {
         width: 90%;
     }
+
+    button {
+        border: none;
+        background: white;
+    }
 }
 `
 

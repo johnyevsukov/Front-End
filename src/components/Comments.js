@@ -4,7 +4,6 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import Comment from './Comment'
 import CreateComment from './CreateComment'
 
-
 const StyledComments = styled.div`
 display: flex;
 flex-direction: column;

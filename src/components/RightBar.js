@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Following from './Following'
 import Followers from './Followers'
 
-
 const StyledRightBar = styled.div`
 display: flex;
 flex-direction: column;

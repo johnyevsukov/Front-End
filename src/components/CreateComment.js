@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 
-
 const StyledCreateComment = styled.div`
 background-color: #f2f2f2;
 width: 22rem;

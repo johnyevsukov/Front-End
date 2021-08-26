@@ -6,7 +6,6 @@ import Feed from './Feed'
 import styled from 'styled-components'
 import LeftProfileBar from './LeftProfileBar'
 
-
 const StyledContent = styled.div`
 display: flex;
 height: calc(100vh - 63px);

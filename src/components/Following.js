@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import axiosWithAuth from '../Utils/axiosWithAuth'
 import UserCard from './UserCard'
 
-
 const StyledFollowing = styled.div`
 display: flex;
 flex-direction: column;

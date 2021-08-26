@@ -6,7 +6,6 @@ import axiosWithAuth from '../Utils/axiosWithAuth'
 import EditProfile from './EditProfile'
 import { importAll, avatarSelector } from '../Utils/avatarSelector'
 
-
 const StyledLeftProfileBar = styled.div`
 display: flex;
 flex-direction: column;
