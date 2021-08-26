@@ -297,7 +297,7 @@ const LeftProfileBar = (props) => {
     const { id } = useParams()
     const [user, setUser] = useState({})
     // const [loading, setLoading] = useState(false)
-    const [mobileAboutToggle, setMobileAboutToggle] = useState(false)
+    const [mobileAboutToggle, setMobileAboutToggle] = useState(true)
     const [edit, setEdit] = useState(false)
     const [deleteUser, setDeleteUser] = useState(false)
     const userId = localStorage.getItem('user_id')
