@@ -19,7 +19,8 @@ with React.js, Node.js, Express.js, and PostgreSQL
     - responsive design 📐
     - yup form validation 📄
     - tokens / user authorization 🔒
-- Mobile layout in the works 🚧 
+- Mobile layout in the works 🚧
+- New accounts autopopulated with connections 🐶 🐱
 
 ### "Pet tested. Pet approved."
 ---
