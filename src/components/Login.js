@@ -181,6 +181,7 @@ button {
     button {
         border: none;
         background: white;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
     }
 }
 `
